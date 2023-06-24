@@ -1,0 +1,17 @@
+{
+  "name": "progetto-ark",
+  "version": "1.0.0",
+  "description": "A barebone Arknights planner",
+  "scripts": {
+    "build": "tailwindcss -i ./main.css -o ../resources/static/css/main.css",
+    "watch": "tailwindcss -i ./main.css --watch"
+  },
+  "author": "aetherstrata",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.3.2"
+  },
+  "dependencies": {
+    "@tailwindcss/forms": "^0.5.3"
+  }
+}
