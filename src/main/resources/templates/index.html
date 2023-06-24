@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title th:text="|${project} - Home|">Items</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+</head>
+<body>
+<script>
+    function openNav() {
+        document.getElementById("sidenav").style.width = "250px";
+    }
+    function closeNav() {
+        document.getElementById("sidenav").style.width = "0";
+    }
+</script>
+<div th:replace="~{fragments/components :: sidenav}"></div>
+<div class="main-container" >
+    <a href="javascript:void(0)" onclick="openNav()">Close</a>
+</div>
+</body>
+</html>

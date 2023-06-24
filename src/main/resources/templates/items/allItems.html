@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-full bg-white">
+<head>
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title th:text="|${project} - Items|">Items</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:each="item : ${items}">
+    <span th:if="${item.canBeCrafted}">C </span>
+    <span th:if="${item.canBeDropped}">D </span>
+    <span th:text="|${item.nameEn}: ${item.description}|"></span>
+</div>
+</body>
+</html>
