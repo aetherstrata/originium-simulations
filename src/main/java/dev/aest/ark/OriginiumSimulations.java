@@ -4,12 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AestArk
+public class OriginiumSimulations
 {
-    public static final String PROJECT_NAME = "aestArk";
+    public static final String PROJECT_NAME = "Originium Simulations";
 
     public static void main(String[] args) {
-        SpringApplication.run(AestArk.class, args);
+        SpringApplication.run(OriginiumSimulations.class, args);
     }
 
 }

@@ -1,6 +1,6 @@
 package dev.aest.ark.controller;
 
-import dev.aest.ark.AestArk;
+import dev.aest.ark.OriginiumSimulations;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -9,6 +9,6 @@ public class GlobalController
 {
     @ModelAttribute("project")
     public String addProjectName(){
-        return AestArk.PROJECT_NAME;
+        return OriginiumSimulations.PROJECT_NAME;
     }
 }
