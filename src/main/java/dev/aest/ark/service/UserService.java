@@ -41,12 +41,10 @@ public class UserService
      */
     @Transactional(readOnly = true)
     public User getCurrentUser() {
-        Principal principal = (Principal)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return principal == null
-            ? null
-            : principal instanceof OAuth2AuthenticationToken token
-                ? ((OAuth2Credentials)token.getPrincipal()).getUser()
-                : this.credentialsRepository.findByUsername(principal.getName()).map(LocalCredentials::getUser).orElse(null);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof LocalCredentials local) return local.getUser();
+        else if (principal instanceof OAuth2Credentials oauth) return oauth.getUser();
+        else return null;
     }
 
     /**
