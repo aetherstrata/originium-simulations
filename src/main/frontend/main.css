@@ -4,8 +4,8 @@
 
 @layer components {
     .sidenav-container {
-        @apply h-full w-[225px] fixed z-10 top-0 left-0 bg-black overflow-x-hidden;
-        transition: 0.5s;
+        @apply h-full w-[250px] fixed z-10 top-0 left-[-250px] bg-black overflow-x-hidden flex flex-col justify-between p-4;
+        transition: left 0.5s;
     }
     .main-container {
         transition: margin-left 0.5s;
