@@ -23,15 +23,6 @@ public class CredentialsService implements UserDetailsService
     private final CredentialsRepository credentialsRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public boolean isOAuth(){
-        return getCurrentAuth() instanceof OAuth2AuthenticationToken;
-    }
-
-    public boolean isAdminUser(){
-        Authentication auth = getCurrentAuth();
-        return auth != null && auth.getAuthorities().stream().anyMatch(x -> x.getAuthority().equals(LocalCredentials.ADMIN_AUTHORITY));
-    }
-
     @Transactional(readOnly = true)
     public LocalCredentials getCredentials(User user) {
         return getCredentials(user.getId());
