@@ -48,10 +48,10 @@ public final class Item
     private Boolean canBeCrafted;
 
     public String getBackgroundImage(){
-        return "images/bg/item-%d.png".formatted(level);
+        return "/images/bg/item-%d.png".formatted(level);
     }
 
     public String getForegroundImage(){
-        return "images/item/%d.png".formatted(level);
+        return "/images/item/%d.png".formatted(id);
     }
 }
