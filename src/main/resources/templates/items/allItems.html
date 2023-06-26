@@ -10,6 +10,7 @@
 <div th:each="item : ${items}">
     <span th:if="${item.canBeCrafted}">C </span>
     <span th:if="${item.canBeDropped}">D </span>
+    <img th:src="${item.getForegroundImage()}">
     <span th:text="|${item.nameEn}: ${item.description}|"></span>
 </div>
 </body>

@@ -1,13 +1,91 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<!--
+<script>
+    function openNav() {
+        document.getElementById("sidenav").style.width = "250px";
+    }
+    function closeNav() {
+        document.getElementById("sidenav").style.width = "0";
+    }
+</script>
+-->
+<header th:fragment="header" class="flex bg-yellow-400">
+    <script>
+        function openNav() {
+            let sidenav = document.getElementById("sidenav");
+            let main = document.getElementById("main");
+            if (sidenav.style.left === "0px"){
+                sidenav.style.left = "-250px";
+                main.style.marginLeft = "0px";
+            } else {
+                sidenav.style.left = "0px";
+                main.style.marginLeft = "250px";
+            }
+        }
+    </script>
+    <div class="flex place-content-start m-5 space-x-5 float-left w-1/2">
+        <!-- Left -->
+        <a onclick="openNav()" class="cursor-pointer">
+            <button class="px-4 py-1.5 font-bold text-white bg-slate-950 rounded hover:bg-blue-700">Menu</button>
+        </a>
+    </div>
+    <div class="relative flex place-content-center whitespace-nowrap">
+        <!-- Center -->
+        <a th:href="@{/}">
+            <img th:src="@{/images/originium-simulations-logo.svg}" class="h-[76px]">
+        </a>
+    </div>
+    <div class="flex place-content-end m-5 w-1/2 space-x-5">
+        <!-- Right -->
+        <div class="pt-1.5" sec:authorize="isAuthenticated()">
+            <span class="text-xl text-sky-50 hover:underline" sec:authentication="name"></span>
+        </div>
+        <div sec:authorize="hasAuthority('ADMIN')">
+            <a th:href="@{/admin}">
+                <button
+                        type="submit"
+                        class="px-4 py-1.5 font-bold text-white bg-slate-950 rounded hover:bg-blue-700">
+                    Admin
+                </button>
+            </a>
+        </div>
+        <div sec:authorize="isAuthenticated()">
+
+            <form th:action="@{/logout}" method="post">
+                <button
+                        type="submit"
+                        class="px-4 py-1.5 font-bold text-white bg-slate-950 rounded hover:bg-blue-700">
+                    Logout
+                </button>
+            </form>
+        </div>
+        <div sec:authorize="isAnonymous()">
+            <a th:href="@{/login}">
+                <button class="px-4 py-1.5 font-bold text-white bg-slate-950 rounded hover:bg-blue-700">Login</button>
+            </a>
+        </div>
+    </div>
+</header>
 <div th:fragment="sidenav" id="sidenav" class="sidenav-container">
-    <span class="text-slate-100">Hello</span>
-    <a href="javascript:void(0)" onclick="closeNav()">Close</a>
+    <script>
+        function closeNav() {
+            document.getElementById("sidenav").style.left = "-250px";
+            document.getElementById("main").style.marginLeft = "0px";
+        }
+    </script>
+    <div class="flex flex-col">
+        <a onclick="closeNav()" class="cursor-pointer rounded-xl bg-yellow-400 p-4 font-bold text-center block">Close</a>
+        <span class="text-slate-100">Hello</span>
+    </div>
+    <div>
+        <a th:href="@{/credits}" class="text-slate-400 hover:underline">Credits</a>
+    </div>
 </div>
 </body>
 </html>
