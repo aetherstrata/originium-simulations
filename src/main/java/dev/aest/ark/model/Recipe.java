@@ -19,6 +19,6 @@ public final class Recipe
     @ManyToOne
     private Item result;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Ingredient> ingredients;
 }
