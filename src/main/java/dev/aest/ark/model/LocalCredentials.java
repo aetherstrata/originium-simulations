@@ -30,8 +30,8 @@ public final class LocalCredentials implements UserDetails
     private User user;
 
     @Column(unique = true)
-    @Pattern(regexp = "^[A-Za-z0-9_.].$")
     @NotBlank
+    @Pattern(regexp = "^[A-Za-z0-9_.]+$")
     private String username;
 
     @Column(nullable = false)
@@ -42,7 +42,7 @@ public final class LocalCredentials implements UserDetails
     private String authority;
 
     @ColumnDefault("true")
-    private Boolean enabled;
+    private Boolean enabled = true;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
