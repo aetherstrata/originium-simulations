@@ -6,12 +6,12 @@
     <title th:text="|${project} - Home|">Items</title>
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
 </head>
-<body>
+<body class="bg-neutral-800">
 <div th:replace="~{fragments/components :: sidenav}"></div>
 <div id="main" class="main-container">
     <div th:replace="~{fragments/components :: header}"></div>
     <div class="flex flex-col w-full h-full place-content-center">
-        <img th:src="@{/images/originium-simulations.svg}" class="h-[50vh]">
+        <img th:src="@{/images/originium-simulations-color.svg}" class="h-[50vh]">
     </div>
 </div>
 </body>
