@@ -44,9 +44,9 @@ public class AuthController
         this.credentialsValidator.validate(credentials, credentialsBinding);
         if(!userBinding.hasErrors() && !credentialsBinding.hasErrors()) {
             credentials.setUser(user);
-            userService.saveUser(user);
             credentialsService.saveCredentials(credentials);
-            model.addAttribute("user", user);
+            model.addAttribute("email", user.getEmail());
+            model.addAttribute("username", credentials.getUsername());
             return "auth/successfulRegister";
         }
         return "auth/formRegister";
