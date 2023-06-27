@@ -24,6 +24,6 @@ public class Drop
 
     private Double standardDeviation;
 
-    @Formula("quantity / times")
+    @Formula("(SELECT CAST(d.quantity AS FLOAT) / d.times FROM drops d WHERE d.id=id)")
     private Double dropRate;
 }
