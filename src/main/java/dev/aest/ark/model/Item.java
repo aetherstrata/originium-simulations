@@ -5,7 +5,6 @@ import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Formula;
 
-import java.nio.file.Path;
 import java.util.List;
 
 @Data
@@ -42,7 +41,7 @@ public final class Item
 
     //Materialized view
     @Formula("(SELECT i.droppable FROM item_capabilities i WHERE i.item_id=id)")
-    private Boolean canBeDropped;
+    private Boolean canBeFarmed;
 
     @Formula("(SELECT i.craftable FROM item_capabilities i WHERE i.item_id=id)")
     private Boolean canBeCrafted;
