@@ -1,6 +1,6 @@
 INSERT INTO items (id, level, type, name_cn, name_en, description, usage)
 VALUES
-    (3003, 3, 1, '赤金', 'Pure Gold', 'How much ore does it take to make such valuable gold bars? It doesn''t matter. What matters is that they''re yours.', 'A refined gold bar. Can be exchanged for a lot of LMD. 1x Pure Gold = 500 LMD (RIIC Trading Post).'),
+    (3003, 4, 1, '赤金', 'Pure Gold', 'How much ore does it take to make such valuable gold bars? It doesn''t matter. What matters is that they''re yours.', 'A refined gold bar. Can be exchanged for a lot of LMD. 1x Pure Gold = 500 LMD (RIIC Trading Post).'),
     /**********************************************************************/
     /*                         # BATTLE RECORDS #                         */
     /**********************************************************************/
