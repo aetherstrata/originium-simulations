@@ -14,11 +14,11 @@
         <h2 class="text-3xl font-bold text-center text-yellow-400">Item list</h2>
         <form th:action="@{/items}" class="flex space-x-4">
             <label>
-                <select name="type">
+                <select name="type" class="form-input-field">
                     <option value="battle-records">Battle records</option>
                     <option value="carbon">Carbon</option>
                     <option value="chip">Chips</option>
-                    <option value="skill-summary">Skil summaries</option>
+                    <option value="skill-summary">Skill summaries</option>
                     <option value="material">Materials</option>
                 </select>
             </label>
