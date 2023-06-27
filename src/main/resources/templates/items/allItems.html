@@ -1,17 +1,56 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-full bg-white">
 <head>
-    <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}"/>
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.png}"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title th:text="|${project} - Items|">Items</title>
+    <title th:text="|Items - ${project}|">Items</title>
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
 </head>
-<body>
-<div th:each="item : ${items}">
-    <span th:if="${item.canBeCrafted}">C </span>
-    <span th:if="${item.canBeDropped}">D </span>
-    <img th:src="${item.getForegroundImage()}">
-    <span th:text="|${item.nameEn}: ${item.description}|"></span>
+<body class="bg-neutral-800">
+<div th:replace="~{fragments/components :: sidenav}"></div>
+<div id="main" class="main-container">
+    <div th:replace="~{fragments/components :: header}"></div>
+    <div class="flex justify-between pt-24 pb-12 max-w-3xl m-auto">
+        <h2 class="text-3xl font-bold text-center text-yellow-400">Item list</h2>
+        <form th:action="@{/items}" class="flex space-x-4">
+            <label>
+                <select name="type">
+                    <option value="battle-records">Battle records</option>
+                    <option value="carbon">Carbon</option>
+                    <option value="chip">Chips</option>
+                    <option value="skill-summary">Skil summaries</option>
+                    <option value="material">Materials</option>
+                </select>
+            </label>
+            <label class="inline-flex items-center">
+                <input
+                        type="submit"
+                        class="cursor-pointer rounded px-4 py-1.5 font-bold bg-yellow-400 text-gray-700 hover:bg-blue-700 hover:text-white"
+                        value="Filter"
+                />
+            </label>
+        </form>
+    </div>
+    <div class="flex flex-col justify-center space-y-4 bg-neutral-800 pb-12">
+        <div th:each="item : ${items}" class="flex rounded-xl bg-yellow-400 m-auto pt-2 pb-4">
+            <div class="w-[96px] h-[96px]">
+                <div th:replace="~{fragments/components :: itemImage (${item})}"></div>
+            </div>
+            <div class="flex flex-col w-256 px-12">
+                <div class="flex justify-between">
+                    <a th:href="@{/items/{id}(id=${item.id})}">
+                        <span th:text="${item.nameEn}" class="font-bold text-xl hover:text-blue-700"></span>
+                    </a>
+                    <div class="space-x-2">
+                        <span th:if="${item.canBeCrafted}" class="rounded bg-blue-700 text-white px-1">Craftable</span>
+                        <span th:if="${item.getCanBeFarmed}" class="rounded bg-blue-700 text-white px-1">Farmable</span>
+                    </div>
+                </div>
+                <div class="bg-slate-950 h-[2px]"></div>
+                <span th:text="${item.description}"></span>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

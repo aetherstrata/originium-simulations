@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-full bg-white">
+<head>
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.png}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title th:text="|${item.nameEn} - ${project}|">Items</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+</head>
+<body class="bg-neutral-800">
+<div th:replace="~{fragments/components :: sidenav}"></div>
+<div id="main" class="main-container">
+    <div th:replace="~{fragments/components :: header}"></div>
+    <div class="flex flex-col w-full py-24 space-y-8 bg-neutral-800">
+        <span th:text="${item.nameEn}" class="m-auto text-4xl text-yellow-400 font-bold"></span>
+        <div class="m-auto w-[190px] h-[190px]">
+            <div th:replace="~{fragments/components :: itemImage (${item})}"></div>
+        </div>
+        <div class="flex flex-col w-256 px-12 rounded-xl bg-yellow-400 m-auto pt-2 pb-4 space-y-4">
+            <div>
+                <span class="font-bold text-xl">Description</span>
+                <div class="bg-slate-950 h-[2px]"></div>
+                <span th:text="${item.description}"></span>
+            </div>
+            <div>
+                <span class="font-bold text-xl">Usage</span>
+                <div class="bg-slate-950 h-[2px]"></div>
+                <span th:text="${item.usage}"></span>
+            </div>
+        </div>
+        <div th:if="${item.canBeCrafted}" class="flex flex-col w-256 px-12 rounded-xl bg-yellow-400 m-auto pt-2 pb-4">
+            <span class="font-bold text-xl">Recipes</span>
+            <div th:each="recipe : ${item.recipes}">
+                <div class="bg-slate-950 h-[2px]"></div>
+                <div class="flex justify-around mt-4">
+                    <div>
+                        <div class="m-auto w-[96px] h-[96px]">
+                            <div th:replace="~{fragments/components :: itemImage (${item})}"></div>
+                        </div>
+                        <span th:text="|${recipe.quantity}x ${item.nameEn}|"></span>
+                    </div>
+                    <div class="bg-slate-950 w-[2px] h-auto"></div>
+                    <div class="flex flex-col justify-center">
+                        <div th:each="component : ${recipe.ingredients}" class="flex items-center">
+                            <div class="w-[36px] h-[36px]">
+                                <div th:replace="~{fragments/components :: itemImage (${component.ingredient})}"></div>
+                            </div>
+                            <span th:text="|${component.quantity}x|"></span>&nbsp;
+                            <a th:href="@{/items/{id}(id=${component.ingredient.id})}">
+                                <span th:text="${component.ingredient.nameEn}" class="hover:underline"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:if="${item.canBeFarmed}" class="flex flex-col w-256 px-12 rounded-xl bg-yellow-400 m-auto pt-2 pb-4">
+            <span class="font-bold text-xl">Farming stages</span>
+            <div class="bg-slate-950 h-[2px]"></div>
+            <div class="grid grid-cols-5 gap-8 w-full mt-2">
+                <div th:each="stageDrop : ${item.sources}" class="flex flex-col justify-center">
+                    <span th:text="${stageDrop.stage.name}" class="font-bold text-lg"></span>
+                    <span th:text="${#numbers.formatPercent(stageDrop.dropRate,1,2)}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -6,16 +6,16 @@
     <title th:text="|${project} - Success|">Title</title>
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
 </head>
-<body>
+<body class="bg-neutral-800">
 <div th:replace="~{fragments/components :: sidenav}"></div>
 <div id="main" class="main-container">
     <div th:replace="~{fragments/components :: header}"></div>
-    <div class="flex flex-col justify-center font-comfortaa pt-20">
-        <div class="flex flex-col justify-center m-auto py-8 px-4 space-y-8 rounded-xl bg-sky-100 max-w-xl">
-            <span class="text-center text-4xl text-gray-700 font-bold">Congratulations</span>
-            <span class="text-center text-3xl text-gray-700">Your account has been created</span>
-            <span class="text-center text-xl text-gray-700" th:text="${user.email}"></span>
-            <span class="text-center text-xl text-gray-700" th:text="|${user.credentials.username}|"></span>
+    <div class="flex flex-col justify-center pt-20">
+        <div class="flex flex-col justify-center m-auto py-8 px-4 space-y-8 rounded-xl bg-blue-700 max-w-xl">
+            <span class="text-center text-4xl text-white font-bold">Congratulations</span>
+            <span class="text-center text-3xl text-white">Your account has been created</span>
+            <span class="text-center text-xl text-white" th:text="${username}"></span>
+            <span class="text-center text-xl text-white" th:text="${email}"></span>
         </div>
     </div>
 </div>
