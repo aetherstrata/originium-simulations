@@ -53,7 +53,7 @@ public class AuthConfig
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.GET, "/","/register", "/items", "/api/v1/**", "/css/**", "/images/**", "/favicon.png").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/","/register", "/items/**", "/api/v1/**", "/css/**", "/images/**", "/favicon.png").permitAll()
                         .requestMatchers(HttpMethod.POST, "/register", "/login").permitAll()
                         .requestMatchers("/admin/**").hasAuthority(LocalCredentials.ADMIN_AUTHORITY)
                         .anyRequest().authenticated())
@@ -62,11 +62,11 @@ public class AuthConfig
                 .formLogin(login -> login
                         .loginPage("/login")
                         .failureUrl("/login?error=true")
-                        .defaultSuccessUrl("/success")
+                        .defaultSuccessUrl("/success", true)
                         .permitAll())
                 .oauth2Login(oauth -> oauth
                         .loginPage("/login")
-                        .defaultSuccessUrl("/oauth2-success")
+                        .defaultSuccessUrl("/oauth2-success", true)
                         .userInfoEndpoint(user -> user
                                 .userService(oauth2UserService())))
                 .logout(logout -> logout
