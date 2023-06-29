@@ -10,9 +10,4 @@ public class IndexController
     public String getHomepage(){
         return "index";
     }
-
-    @GetMapping("/credits")
-    public String getCreditPage(){
-        return "credits";
-    }
 }

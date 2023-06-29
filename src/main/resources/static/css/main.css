@@ -844,6 +844,10 @@ select {
   display: grid;
 }
 
+.h-96 {
+  height: 24rem;
+}
+
 .h-\[190px\] {
   height: 190px;
 }
@@ -858,10 +862,6 @@ select {
 
 .h-\[36px\] {
   height: 36px;
-}
-
-.h-\[50vh\] {
-  height: 50vh;
 }
 
 .h-\[76px\] {
@@ -883,6 +883,10 @@ select {
 
 .h-full {
   height: 100%;
+}
+
+.h-screen {
+  height: 100vh;
 }
 
 .w-1\/2 {
@@ -1030,6 +1034,12 @@ select {
   --tw-space-y-reverse: 0;
   margin-top: calc(3rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(3rem * var(--tw-space-y-reverse));
+}
+
+.space-y-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {

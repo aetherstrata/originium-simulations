@@ -73,8 +73,9 @@
         <a sec:authorize="isAuthenticated()" th:href="@{/user/inventory}" class="rounded-xl bg-yellow-400 py-[0.6rem] font-bold text-center block hover:bg-blue-700">Inventory</a>
         <a sec:authorize="isAuthenticated()" th:href="@{/user/planner}" class="rounded-xl bg-yellow-400 py-[0.6rem] font-bold text-center block hover:bg-blue-700">Planner</a>
     </div>
-    <div>
-        <a th:href="@{/credits}" class="text-slate-400 hover:underline">Credits</a>
+    <div class="space-y-2">
+        <span class="text-slate-400 block">Originium Simulations uses various game resources to reflect game elements. Copyright for these resources belongs to Shanghai Hypergryph Network Technology Co., Ltd. and/or its affiliates.</span>
+        <span class="text-slate-400 block">Drop statistics are provided by <a href="https://penguin-stats.io/" class="text-white hover:underline">Penguin Statistics</a>.</span>
     </div>
 </div>
 <div th:fragment="itemImage (item)" class="relative">
