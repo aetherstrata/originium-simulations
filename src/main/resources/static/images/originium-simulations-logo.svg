@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="357.97" height="474.76" version="1.1" viewBox="0 0 357.97 474.76" xmlns="http://www.w3.org/2000/svg">
- <g transform="translate(-75.606 -18.619)" stroke-width="1.629">
-  <text x="156.47487" y="441.81393" fill="#000000" font-family="'Wicked Queen BB'" font-size="521.3px" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal" xml:space="preserve"><tspan x="156.47487" y="441.81393" stroke-width="1.629">O</tspan></text>
-  <text x="95.639931" y="358.32498" fill="#00ff8b" font-family="'Stay Dreaming'" font-size="417.04px" style="font-variant-caps:normal;font-variant-east-asian:normal;font-variant-ligatures:normal;font-variant-numeric:normal" xml:space="preserve"><tspan x="95.639931" y="358.32498" stroke-width="1.629">S</tspan></text>
- </g>
+<svg id="Livello_2" data-name="Livello 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420.72 114.02">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: PROJECTSPACE, 'PROJECT SPACE';
+        font-size: 29.75px;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        fill: #081525;
+      }
+
+      .cls-2 {
+        font-family: AzonixRegular, Azonix;
+        font-size: 78.57px;
+      }
+    </style>
+  </defs>
+  <g id="Livello_1-2" data-name="Livello 1">
+    <path class="cls-3" d="m35.25,44.29c-2.96-2.96-7.77-2.96-10.73,0,2.96-2.96,2.96-7.77,0-10.73,2.96,2.96,7.77,2.96,10.73,0-2.96,2.96-2.96,7.77,0,10.73Z"/>
+    <g>
+      <text class="cls-2" transform="translate(0 66.78)"><tspan x="0" y="0">ORIGINIUM</tspan></text>
+      <text class="cls-1" transform="translate(2 106.4)"><tspan x="0" y="0">SIMULATIONS</tspan></text>
+    </g>
+  </g>
 </svg>

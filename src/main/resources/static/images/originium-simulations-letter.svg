@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Livello_2" data-name="Livello 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 103.07 141.96">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: AzonixRegular, Azonix;
+        font-size: 137.42px;
+      }
+
+      .cls-1, .cls-2 {
+        fill: #081525;
+      }
+    </style>
+  </defs>
+  <g id="Livello_1-2" data-name="Livello 1">
+    <text class="cls-1" transform="translate(0 116.81)"><tspan x="0" y="0">O</tspan></text>
+    <path class="cls-2" d="m60.88,77.88c-5.29-5.29-13.88-5.29-19.17,0,5.29-5.29,5.29-13.88,0-19.17,5.29,5.29,13.88,5.29,19.17,0-5.29,5.29-5.29,13.88,0,19.17Z"/>
+  </g>
+</svg>
