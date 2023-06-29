@@ -74,14 +74,8 @@ public class UserController
             return "users/addToInventory";
         }
         InventoryItem storedItem = inventoryItemService.getUserInventoryItem(user, item);
-        if (storedItem == null) {
-            newItem.setItem(item);
-            newItem.setUser(user);
-            inventoryItemService.saveItem(newItem);
-        } else {
-            storedItem.setQuantity(storedItem.getQuantity() + newItem.getQuantity());
-            inventoryItemService.saveItem(storedItem);
-        }
+        if (storedItem == null) storedItem = new InventoryItem(user, item);
+        inventoryItemService.increaseItemBy(storedItem, newItem.getQuantity());
         return "redirect:/user/inventory";
     }
 
@@ -92,16 +86,8 @@ public class UserController
         Item item = itemService.getItem(id);
         if (item == null) return ItemController.NOT_FOUND;
         InventoryItem storedItem = inventoryItemService.getUserInventoryItem(user, item);
-        if (storedItem == null) {
-            InventoryItem newItem = new InventoryItem();
-            newItem.setQuantity(1);
-            newItem.setItem(item);
-            newItem.setUser(user);
-            inventoryItemService.saveItem(newItem);
-        } else {
-            storedItem.setQuantity(storedItem.getQuantity() + 1);
-            inventoryItemService.saveItem(storedItem);
-        }
+        if (storedItem == null) storedItem = new InventoryItem(user, item);
+        inventoryItemService.increaseItemBy(storedItem, 1);
         return "redirect:/user/inventory";
     }
 
@@ -112,14 +98,7 @@ public class UserController
         Item item = itemService.getItem(id);
         if (item == null) return ItemController.NOT_FOUND;
         InventoryItem storedItem = inventoryItemService.getUserInventoryItem(user, item);
-        if (storedItem != null) {
-            if (storedItem.getQuantity() == 1){
-                inventoryItemService.deleteItem(storedItem);
-            } else {
-                storedItem.setQuantity(storedItem.getQuantity() - 1);
-                inventoryItemService.saveItem(storedItem);
-            }
-        }
+        if (storedItem != null) inventoryItemService.decreaseItemBy(storedItem, 1);
         return "redirect:/user/inventory";
     }
 }
