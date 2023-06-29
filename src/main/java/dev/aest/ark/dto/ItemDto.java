@@ -2,14 +2,15 @@ package dev.aest.ark.dto;
 
 import dev.aest.ark.model.Item;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class ItemDto extends SimpleItemDto
+public class ItemDto
 {
+    private Long id;
+    private String name_en;
+    private String name_cn;
     private String description;
     private String usage;
     private Integer level;
@@ -19,7 +20,9 @@ public class ItemDto extends SimpleItemDto
     private String image;
 
     protected ItemDto(Item item){
-        super(item);
+        this.id = item.getId();
+        this.name_en = item.getNameEn();
+        this.name_cn = item.getNameCn();
         this.description = item.getDescription();
         this.usage = item.getUsage();
         this.level = item.getLevel();
