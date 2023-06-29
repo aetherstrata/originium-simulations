@@ -21,7 +21,7 @@ public class PlannedItemService
     }
 
     @Transactional
-    public void clearUserPlannedItems(User user) {
+    public void clearUserPlanner(User user) {
         this.plannedItemRepository.deleteAllByUser(user);
     }
 

@@ -61,7 +61,7 @@ public class AdminController
             @PathVariable("id") final Long id){
         User user = userService.getUser(id);
         if (user == null) return UserController.NOT_FOUND;
-        plannedItemService.clearUserPlannedItems(user);
+        plannedItemService.clearUserPlanner(user);
         return "redirect:/admin/user/%d".formatted(user.getId());
     }
 }
