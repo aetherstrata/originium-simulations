@@ -17,7 +17,7 @@ public class PlannedItemService
 
     @Transactional(readOnly = true)
     public List<PlannedItem> getUserPlannedItems(User user) {
-        return this.plannedItemRepository.findAllByUser(user);
+        return this.plannedItemRepository.findAllByUserOrderByItemId(user);
     }
 
     @Transactional

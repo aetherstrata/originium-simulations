@@ -24,7 +24,7 @@ public class InventoryItemService
 
     @Transactional(readOnly = true)
     public List<InventoryItem> getUserInventoryItems(User user){
-        return this.inventoryItemRepository.findAllByUser(user);
+        return this.inventoryItemRepository.findAllByUserOrderByItemId(user);
     }
 
     @Transactional(readOnly = true)

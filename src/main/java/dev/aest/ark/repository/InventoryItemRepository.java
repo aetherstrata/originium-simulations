@@ -11,11 +11,11 @@ import java.util.Optional;
 
 public interface InventoryItemRepository extends CrudRepository<InventoryItem, Long>
 {
+    List<InventoryItem> findAllByUserOrderByItemId(User user);
+
     void deleteAllByUser(User user);
 
     Optional<InventoryItem> findByUserAndItem(User user, Item item);
-
-    List<InventoryItem> findAllByUser(User user);
 
     @Query("SELECT SUM(i.quantity) FROM InventoryItem i WHERE i.user=:user")
     Long countItemsByUser(User user);
