@@ -28,6 +28,9 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
+import static dev.aest.ark.controller.AuthController.LOGIN_ENDPOINT;
+import static dev.aest.ark.controller.AuthController.REGISTER_ENDPOINT;
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -53,19 +56,19 @@ public class AuthConfig
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.GET, "/","/register", "/items", "/item/**", "/api/v1/**", "/css/**", "/images/**", "/favicon.png").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/register", "/login").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/", "/credits", "/items", "/item/**", "/api/v1/**", "/css/**", "/images/**", "/favicon.png", REGISTER_ENDPOINT).permitAll()
+                        .requestMatchers(HttpMethod.POST, REGISTER_ENDPOINT, LOGIN_ENDPOINT).permitAll()
                         .requestMatchers("/admin/**").hasAuthority(LocalCredentials.ADMIN_AUTHORITY)
                         .anyRequest().authenticated())
                 //.requestCache(cache -> cache
                 //        .requestCache(requestCache))
                 .formLogin(login -> login
-                        .loginPage("/login")
-                        .failureUrl("/login?error=true")
+                        .loginPage(LOGIN_ENDPOINT)
+                        .failureUrl(LOGIN_ENDPOINT+"?error=true")
                         .defaultSuccessUrl("/success", true)
                         .permitAll())
                 .oauth2Login(oauth -> oauth
-                        .loginPage("/login")
+                        .loginPage(LOGIN_ENDPOINT)
                         .defaultSuccessUrl("/oauth2-success", true)
                         .userInfoEndpoint(user -> user
                                 .userService(oauth2UserService())))

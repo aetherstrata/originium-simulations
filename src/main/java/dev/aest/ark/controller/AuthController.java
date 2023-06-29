@@ -20,20 +20,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 public class AuthController
 {
-    private final UserService userService;
-    private final DuplicateUserValidator duplicateUserValidator;
+    public static final String LOGIN_ENDPOINT = "/login";
+    public static final String REGISTER_ENDPOINT = "/register";
 
     private final CredentialsService credentialsService;
     private final CredentialsValidator credentialsValidator;
+    private final DuplicateUserValidator duplicateUserValidator;
 
-    @GetMapping("/register")
+    @GetMapping(REGISTER_ENDPOINT)
     public String registerPage(Model model){
         model.addAttribute("user", new User());
         model.addAttribute("credentials", new LocalCredentials());
         return "auth/formRegister";
     }
 
-    @PostMapping("/register")
+    @PostMapping(REGISTER_ENDPOINT)
     public String registerUser(
             @Valid @ModelAttribute("user") final User user,
             BindingResult userBinding,
@@ -53,7 +54,7 @@ public class AuthController
         return "auth/formRegister";
     }
 
-    @GetMapping("/login")
+    @GetMapping(LOGIN_ENDPOINT)
     public String loginPage(
             @RequestParam(value = "error", required = false) final Boolean loginError,
             Model model){
