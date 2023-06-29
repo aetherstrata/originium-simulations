@@ -1178,6 +1178,14 @@ select {
   padding-bottom: 1rem;
 }
 
+.pl-4 {
+  padding-left: 1rem;
+}
+
+.pr-12 {
+  padding-right: 3rem;
+}
+
 .pt-12 {
   padding-top: 3rem;
 }
