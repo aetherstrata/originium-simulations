@@ -20,22 +20,24 @@
             <a th:href="@{/items}" class="px-4 py-1.5 font-bold text-white bg-slate-950 rounded hover:bg-blue-700">Add new item</a>
         </div>
         <div th:unless="${#lists.isEmpty(inventory)}" class="grid grid-cols-6 justify-between w-256 m-auto bg-yellow-400 py-4 px-12 rounded-xl">
-            <div th:each="invItem : ${inventory}" class="flex flex-col justify-center">
-                <div class="w-[96px] h-[96px] m-auto">
-                    <div th:replace="~{fragments/components :: itemImage (${invItem.item})}"></div>
-                </div>
-                <div class="text-center">
-                    <a th:href="@{/item/{id}(id=${invItem.item.id})}">
-                        <span th:text="${invItem.item.nameEn}" class="hover:underline font-bold"></span>
-                    </a>
+            <div th:each="invItem : ${inventory}" class="flex flex-col justify-between">
+                <div>
+                    <div class="w-[96px] h-[96px] m-auto">
+                        <div th:replace="~{fragments/components :: itemImage (${invItem.item})}"></div>
+                    </div>
+                    <div class="text-center">
+                        <a th:href="@{/item/{id}(id=${invItem.item.id})}">
+                            <span th:text="${invItem.item.nameEn}" class="hover:underline font-bold"></span>
+                        </a>
+                    </div>
                 </div>
                 <div class="flex justify-around">
-                    <form th:action="@{/user/inventory/removeOne/{id}(id=${invItem.item.id})}" method="post" class="bg-black rounded-full">
-                        <button type="submit" class="text-white block m-auto w-[24px]">-</button>
+                    <form th:action="@{/user/inventory/removeOne/{id}(id=${invItem.item.id})}" method="post" class="bg-black rounded-full hover:bg-blue-700">
+                        <button type="submit" class="text-white font-bold block m-auto w-[24px]">-</button>
                     </form>
                     <span th:text="${invItem.quantity}" class="font-bold"></span>
-                    <form th:action="@{/user/inventory/addOne/{id}(id=${invItem.item.id})}" method="post" class="bg-black rounded-full">
-                        <button type="submit" class="text-white block m-auto w-[24px]">+</button>
+                    <form th:action="@{/user/inventory/addOne/{id}(id=${invItem.item.id})}" method="post" class="bg-black rounded-full hover:bg-blue-700">
+                        <button type="submit" class="text-white font-bold block m-auto w-[24px]">+</button>
                     </form>
                 </div>
             </div>

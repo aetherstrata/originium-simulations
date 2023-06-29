@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-full bg-white">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" class="h-full bg-neutral-800">
 <head>
     <link rel="icon" type="image/x-icon" th:href="@{/favicon.png}"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -12,8 +12,16 @@
     <div th:replace="~{fragments/components :: header}"></div>
     <div class="flex flex-col w-full py-24 space-y-8 bg-neutral-800">
         <span th:text="${item.nameEn}" class="m-auto text-4xl text-yellow-400 font-bold"></span>
-        <div class="m-auto w-[190px] h-[190px]">
-            <div th:replace="~{fragments/components :: itemImage (${item})}"></div>
+        <div class="flex justify-around w-256 m-auto items-center">
+            <a sec:authorize="isAuthenticated()" th:href="@{/user/inventory/add/{id}(id=${item.id})}">
+                <button class="primary-action-button">Store</button>
+            </a>
+            <div class="m-auto w-[190px] h-[190px]">
+                <div th:replace="~{fragments/components :: itemImage (${item})}"></div>
+            </div>
+            <a sec:authorize="isAuthenticated()" th:href="@{/user/planner/add/{id}(id=${item.id})}">
+                <button class="primary-action-button">Plan</button>
+            </a>
         </div>
         <div class="flex flex-col w-256 px-12 rounded-xl bg-yellow-400 m-auto pt-2 pb-4 space-y-4">
             <div>
@@ -32,22 +40,23 @@
             <div th:each="recipe : ${item.recipes}">
                 <div class="bg-slate-950 h-[2px]"></div>
                 <div class="flex justify-around mt-4">
-                    <div>
+                    <div class="w-1/2">
                         <div class="m-auto w-[96px] h-[96px]">
                             <div th:replace="~{fragments/components :: itemImage (${item})}"></div>
                         </div>
-                        <span th:text="|${recipe.quantity}x ${item.nameEn}|"></span>
+                        <span th:text="|${recipe.quantity}x ${item.nameEn}|" class="block text-center"></span>
                     </div>
                     <div class="bg-slate-950 w-[2px] h-auto"></div>
-                    <div class="flex flex-col justify-center">
-                        <div th:each="component : ${recipe.ingredients}" class="flex items-center">
-                            <div class="w-[36px] h-[36px]">
-                                <div th:replace="~{fragments/components :: itemImage (${component.ingredient})}"></div>
-                            </div>
-                            <span th:text="|${component.quantity}x|"></span>&nbsp;
-                            <a th:href="@{/item/{id}(id=${component.ingredient.id})}">
-                                <span th:text="${component.ingredient.nameEn}" class="hover:underline"></span>
-                            </a>
+                    <div class="flex flex-col justify-center m-auto w-fit">
+                        <div th:each="component : ${recipe.ingredients}" class="flex place-content-start">
+                                <div class="w-[36px] h-[36px]">
+                                    <div th:replace="~{fragments/components :: itemImage (${component.ingredient})}"></div>
+                                </div>
+                                <span th:text="|${component.quantity}x|"></span>&nbsp;
+                                <a th:href="@{/item/{id}(id=${component.ingredient.id})}">
+                                    <span th:text="${component.ingredient.nameEn}" class="hover:underline"></span>
+                                </a>
+
                         </div>
                     </div>
                 </div>

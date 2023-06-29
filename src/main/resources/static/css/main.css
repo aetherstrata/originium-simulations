@@ -756,9 +756,9 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(250 204 21 / var(--tw-bg-opacity));
   padding: 1.25rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
   font-weight: 700;
-  --tw-text-opacity: 1;
-  color: rgb(55 65 81 / var(--tw-text-opacity));
 }
 
 .primary-action-button:hover {
@@ -798,6 +798,10 @@ select {
 
 .mb-24 {
   margin-bottom: 6rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
 }
 
 .ml-auto {

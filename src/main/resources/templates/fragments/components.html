@@ -5,16 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-<!--
-<script>
-    function openNav() {
-        document.getElementById("sidenav").style.width = "250px";
-    }
-    function closeNav() {
-        document.getElementById("sidenav").style.width = "0";
-    }
-</script>
--->
 <header th:fragment="header" class="flex bg-yellow-400">
     <script>
         function openNav() {
@@ -81,6 +71,7 @@
         <a onclick="closeNav()" class="cursor-pointer rounded-xl bg-red-700 py-[0.6rem] font-bold text-center block hover:bg-blue-700">Close</a>
         <a th:href="@{/items}" class="rounded-xl bg-yellow-400 py-[0.6rem] font-bold text-center block hover:bg-blue-700">All items</a>
         <a sec:authorize="isAuthenticated()" th:href="@{/user/inventory}" class="rounded-xl bg-yellow-400 py-[0.6rem] font-bold text-center block hover:bg-blue-700">Inventory</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/user/planner}" class="rounded-xl bg-yellow-400 py-[0.6rem] font-bold text-center block hover:bg-blue-700">Planner</a>
     </div>
     <div>
         <a th:href="@{/credits}" class="text-slate-400 hover:underline">Credits</a>

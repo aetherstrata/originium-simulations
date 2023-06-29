@@ -26,6 +26,6 @@
     }
 
     .primary-action-button {
-        @apply p-5 rounded-xl min-w-[12rem] font-bold bg-yellow-400 text-gray-700 hover:bg-blue-700 hover:text-white border-transparent;
+        @apply p-5 rounded-xl min-w-[12rem] font-bold bg-yellow-400 text-2xl hover:bg-blue-700 hover:text-white border-transparent;
     }
 }
