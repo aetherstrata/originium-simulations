@@ -31,11 +31,11 @@ public final class LocalCredentials implements UserDetails
 
     @Column(unique = true)
     @NotBlank
-    @Pattern(regexp = "^[A-Za-z0-9_.]+$")
+    @Pattern(regexp = "^[A-Za-z0-9_.]+$", message = "{username.incorrect}")
     private String username;
 
     @Column(nullable = false)
-    @Pattern(regexp = "^(?=(.*[A-Z])+)(?=(.*[a-z])+)(?=(.*[0-9])+)(?=(.*[!@#$%^&*()_+=.])+).{10,}$")
+    @Pattern(regexp = "^(?=(.*[A-Z])+)(?=(.*[a-z])+)(?=(.*[0-9])+)(?=(.*[!@#$%^&*()_+=.])+).{10,}$", message = "{password.weak}")
     @NotBlank
     private String password;
 

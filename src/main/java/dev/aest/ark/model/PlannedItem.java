@@ -23,7 +23,7 @@ public final class PlannedItem
     private Item item;
 
     @NotNull
-    @Positive
+    @Positive(message = "{number.positive}")
     private Integer quantity = 0;
 
     public PlannedItem(User user, Item item){
