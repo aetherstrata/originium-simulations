@@ -28,9 +28,9 @@ public final class User
     @PrimaryKeyJoinColumn
     private LocalCredentials credentials;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<InventoryItem> ownedItems = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
-    private List<InventoryItem> plannedItems = new ArrayList<>();
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private List<PlannedItem> plannedItems = new ArrayList<>();
 }
