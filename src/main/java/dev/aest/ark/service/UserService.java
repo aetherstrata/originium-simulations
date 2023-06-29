@@ -5,12 +5,12 @@ import dev.aest.ark.model.LocalCredentials;
 import dev.aest.ark.model.User;
 import dev.aest.ark.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -32,6 +32,20 @@ public class UserService
     }
 
     /**
+     * Retrieve a {@link User} from the database based on its ID and its related associations.
+     * @param id the id of the {@link User} to retrieve from the database with its associations initialized
+     * @return the retrieved {@link User}, or null if no {@link User} with the passed ID could be found in the database
+     */
+    @Transactional(readOnly = true)
+    public User getFullUser(Long id){
+        User user = this.userRepository.findById(id).orElse(null);
+        if (user == null) return null;
+        Hibernate.initialize(user.getOwnedItems());
+        Hibernate.initialize(user.getPlannedItems());
+        return user;
+    }
+
+    /**
      * Retrieve the current {@link User} from the database.
      * @return the retrieved {@link User}, or null if no {@link User} is logged in
      */
@@ -49,9 +63,14 @@ public class UserService
      * @throws DataIntegrityViolationException if a {@link User} with the same username
      *                              as the passed User already exists in the database
      */
-    @Transactional(isolation = Isolation.SERIALIZABLE)
+    @Transactional
     public User saveUser(User user) {
         return this.userRepository.save(user);
+    }
+
+    @Transactional
+    public void deleteUser(User user) {
+        this.userRepository.delete(user);
     }
 
     /**

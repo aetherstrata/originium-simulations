@@ -14,10 +14,13 @@
         <h2 class="text-3xl font-bold text-center text-yellow-400">User list</h2>
         <div class="grid grid-cols-5 gap-4 rounded-xl bg-yellow-400 px-12 py-4 max-w-6xl m-auto ">
             <div th:each="user : ${users}" class="flex flex-col">
-                <a th:href="@{/admin/user/{id}(id=${user.id})}">
+                <a th:href="@{/admin/user/{id}(id=${user.id})}" class="w-fit m-auto">
                     <span th:text="${user.nickname}" class="font-bold text-xl hover:underline"></span>
                 </a>
-                <span th:text="${user.email}" class="text-lg"></span>
+                <span th:text="${user.email}" class="text-lg text-center"></span>
+                <form th:action="@{/admin/user/{id}/delete(id=${user.id})}" method="post" class="w-fit ml-auto mt-1">
+                    <button type="submit" class="rounded-xl py-2 px-4 bg-red-700 hover:bg-blue-700 font-bold">Delete user</button>
+                </form>
             </div>
         </div>
         <div th:replace="~{fragments/components :: pageTurner (${pageInfo})}"></div>

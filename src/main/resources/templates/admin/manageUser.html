@@ -18,12 +18,60 @@
                 <span th:text="${user.email}" class="text-lg"></span>
             </div>
             <div class="space-y-4">
-                <form th:action="@{/admin/user/{id}/clearInventoryItems(id=${user.id})}" method="post" class="w-fit ml-auto">
-                    <button type="submit" class="rounded-xl py-2 px-4 bg-red-700 hover:bg-blue-700 font-bold">Clear inventory items</button>
+                <form th:action="@{/admin/user/{id}/clearInventoryItems(id=${user.id})}" method="post"
+                      class="w-fit ml-auto">
+                    <button type="submit" class="rounded-xl py-2 px-4 bg-red-700 hover:bg-blue-700 font-bold">Clear
+                        inventory items
+                    </button>
                 </form>
-                <form th:action="@{/admin/user/{id}/clearPlannedItems(id=${user.id})}" method="post" class="w-fit ml-auto">
-                    <button type="submit" class="rounded-xl py-2 px-4 bg-red-700 hover:bg-blue-700 font-bold">Clear planned items</button>
+                <form th:action="@{/admin/user/{id}/clearPlannedItems(id=${user.id})}" method="post"
+                      class="w-fit ml-auto">
+                    <button type="submit" class="rounded-xl py-2 px-4 bg-red-700 hover:bg-blue-700 font-bold">Clear
+                        planned items
+                    </button>
                 </form>
+            </div>
+        </div>
+        <div class="w-256 m-auto bg-yellow-400 pt-2 pb-4 px-12 rounded-xl">
+            <span class="text-xl font-bold">Owned items</span>
+            <div class="w-full h-[2px] bg-slate-950 mb-4"></div>
+            <div th:if="${#lists.isEmpty(user.plannedItems)}">
+                <span class="text-lg">This user has no owned item.</span>
+            </div>
+            <div th:unless="${#lists.isEmpty(user.ownedItems)}" class="grid grid-cols-6 justify-between">
+                <div th:each="invItem : ${user.ownedItems}" class="flex flex-col justify-between">
+
+                    <div class="w-[96px] h-[96px] m-auto">
+                        <div th:replace="~{fragments/components :: itemImage (${invItem.item})}"></div>
+                    </div>
+                    <div class="text-center">
+                        <span th:text="|${invItem.quantity}x|"></span>
+                        <a th:href="@{/item/{id}(id=${invItem.item.id})}">
+                            <span th:text="${invItem.item.nameEn}" class="hover:underline font-bold"></span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="w-256 m-auto bg-yellow-400 pt-2 pb-4 px-12 rounded-xl">
+            <span class="text-xl font-bold">Planned items</span>
+            <div class="w-full h-[2px] bg-slate-950 mb-4"></div>
+            <div th:if="${#lists.isEmpty(user.plannedItems)}">
+                <span class="text-lg">This user has no planned item.</span>
+            </div>
+            <div th:unless="${#lists.isEmpty(user.plannedItems)}" class="grid grid-cols-6 justify-between">
+                <div th:each="plannedItem : ${user.plannedItems}" class="flex flex-col justify-between">
+                    <div class="w-[96px] h-[96px] m-auto">
+                        <div th:replace="~{fragments/components :: itemImage (${plannedItem.item})}"></div>
+                    </div>
+                    <div class="text-center">
+                        <span th:text="|${plannedItem.quantity}x|"></span>
+                        <a th:href="@{/item/{id}(id=${plannedItem.item.id})}">
+                            <span th:text="${plannedItem.item.nameEn}" class="hover:underline font-bold"></span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

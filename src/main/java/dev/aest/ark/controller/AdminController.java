@@ -41,10 +41,19 @@ public class AdminController
     public String getUserManagePage(
             @PathVariable("id") final Long id,
             Model model){
-        User user = userService.getUser(id);
+        User user = userService.getFullUser(id);
         if (user == null) return UserController.NOT_FOUND;
         model.addAttribute("user", user);
         return "admin/manageUser";
+    }
+
+    @PostMapping("/admin/user/{id}/delete")
+    public String deleteUser(
+            @PathVariable("id") final Long id){
+        User user = userService.getUser(id);
+        if (user == null) return UserController.NOT_FOUND;
+        userService.deleteUser(user);
+        return "redirect:/admin/users";
     }
 
     @PostMapping("/admin/user/{id}/clearInventoryItems")
