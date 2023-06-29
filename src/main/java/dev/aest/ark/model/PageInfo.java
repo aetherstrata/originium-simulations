@@ -1,4 +1,4 @@
-package dev.aest.ark.dto;
+package dev.aest.ark.model;
 
 import org.springframework.data.domain.Page;
 

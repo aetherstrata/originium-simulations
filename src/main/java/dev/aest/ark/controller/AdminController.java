@@ -1,6 +1,6 @@
 package dev.aest.ark.controller;
 
-import dev.aest.ark.dto.PageInfo;
+import dev.aest.ark.model.PageInfo;
 import dev.aest.ark.model.User;
 import dev.aest.ark.service.InventoryItemService;
 import dev.aest.ark.service.PlannedItemService;
