@@ -53,7 +53,7 @@ public class AuthConfig
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.GET, "/","/register", "/items/**", "/api/v1/**", "/css/**", "/images/**", "/favicon.png").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/","/register", "/items", "/item/**", "/api/v1/**", "/css/**", "/images/**", "/favicon.png").permitAll()
                         .requestMatchers(HttpMethod.POST, "/register", "/login").permitAll()
                         .requestMatchers("/admin/**").hasAuthority(LocalCredentials.ADMIN_AUTHORITY)
                         .anyRequest().authenticated())
@@ -103,10 +103,9 @@ public class AuthConfig
             // Register a new user
             User newUser = new User();
             newUser.setEmail(email);
+            newUser.setNickname(username);
             userRepository.save(newUser);
             return new OAuth2Credentials(newUser, provider, username, authorities);
-
-            //Set<GrantedAuthority> authorities = new HashSet<>(oauth2User.getAuthorities());
         };
     }
 }

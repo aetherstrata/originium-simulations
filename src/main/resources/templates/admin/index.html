@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-full bg-white">
+<head>
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title th:text="|404 - ${project}|">Items</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+</head>
+<body class="bg-neutral-800">
+<div th:replace="~{fragments/components :: sidenav}"></div>
+<div id="main" class="main-container">
+    <div th:replace="~{fragments/components :: header}"></div>
+    <div class="flex flex-col place-content-center py-24 w-full space-y-12">
+        <span class="m-auto text-6xl font-bold text-yellow-400">Admin panel</span>
+        <a th:href="@{/admin/users}" class="primary-action-button m-auto">
+            <span class="block text-center">Manage users</span>
+        </a>
+    </div>
+</div>
+</body>
+</html>

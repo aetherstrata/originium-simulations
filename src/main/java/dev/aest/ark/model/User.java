@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -21,13 +22,15 @@ public final class User
     @NotBlank
     private String email;
 
+    private String nickname;
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private LocalCredentials credentials;
 
     @OneToMany(mappedBy = "user")
-    private List<InventoryItem> ownedItems;
+    private List<InventoryItem> ownedItems = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private List<InventoryItem> plannedItems;
+    private List<InventoryItem> plannedItems = new ArrayList<>();
 }

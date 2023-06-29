@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-full bg-white">
+<head>
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.png}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title th:text="|${user.nickname} - ${project}|"></title>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+</head>
+<body class="bg-neutral-800">
+<div th:replace="~{fragments/components :: sidenav}"></div>
+<div id="main" class="main-container">
+    <div th:replace="~{fragments/components :: header}"></div>
+    <div class="flex flex-col py-12 w-full space-y-12">
+        <div class="m-auto flex flex-col justify-center space-y-8">
+            <h2 class="text-6xl font-bold text-yellow-400">User panel</h2>
+            <span th:text="${user.nickname}" class="font-bold text-yellow-400 text-4xl m-auto"></span>
+        </div>
+        <div class="flex justify-between w-256 m-auto">
+            <div class="rounded-xl bg-yellow-400 px-12 py-4">
+                <a th:href="@{/user/inventory}">
+                    <span class="font-bold block text-4xl hover:text-blue-700">Inventory</span>
+                </a>
+                <span>Item count:</span>
+                <span th:text="${inventory_count}" class="font-bold"></span>
+            </div>
+            <div class="rounded-xl bg-yellow-400 px-12 py-4">
+                <a th:href="@{/user/planner}">
+                    <span class="font-bold block text-4xl hover:text-blue-700">Planner</span>
+                </a>
+                <span>Item count:</span>
+                <span th:text="${planned_count}" class="font-bold"></span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

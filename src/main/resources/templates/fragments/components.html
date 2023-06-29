@@ -43,7 +43,9 @@
     </div>
     <div class="flex place-content-end m-5 w-1/2 space-x-5">
         <!-- Right -->
-        <span sec:authorize="isAuthenticated()" sec:authentication="name" class="px-4 bg-emerald-400 rounded font-bold text-2xl text-slate-950"></span>
+        <a sec:authorize="isAuthenticated()" th:href="@{/user}">
+            <span sec:authentication="name" class="px-4 pb-1 bg-emerald-400 rounded font-bold text-2xl text-slate-950 hover:bg-blue-700 hover:text-white"></span>
+        </a>
         <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin}">
             <button
                     type="submit"
@@ -75,10 +77,10 @@
             document.getElementById("main").style.marginLeft = "0px";
         }
     </script>
-    <div class="flex flex-col">
+    <div class="flex flex-col space-y-4">
         <a onclick="closeNav()" class="cursor-pointer rounded-xl bg-red-700 py-[0.6rem] font-bold text-center block hover:bg-blue-700">Close</a>
         <a th:href="@{/items}" class="rounded-xl bg-yellow-400 py-[0.6rem] font-bold text-center block hover:bg-blue-700">All items</a>
-        <a th:href="@{/planner}" class="rounded-xl bg-yellow-400 py-[0.6rem] font-bold text-center block hover:bg-blue-700">Planner</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/user/inventory}" class="rounded-xl bg-yellow-400 py-[0.6rem] font-bold text-center block hover:bg-blue-700">Inventory</a>
     </div>
     <div>
         <a th:href="@{/credits}" class="text-slate-400 hover:underline">Credits</a>
@@ -88,5 +90,17 @@
     <img th:src="${item.getBackgroundImage()}" class="w-full h-full">
     <img th:src="${item.getForegroundImage()}" class="absolute top-0 left-0">
 </div>
-</body>
+<div th:fragment="pageTurner (pageInfo)" class="w-full flex flex-row justify-around">
+    <div>
+        <a th:if="${pageInfo.hasPrev}" th:href="@{{request}(page=${pageInfo.number},request=${requestUrl})}" class="w-fit">
+            <button class="text-white">Previous</button>
+        </a>
+    </div>
+    <span th:text="${pageInfo.number() + 1}" class="text-2xl font-bold text-white"></span>
+    <div>
+        <a th:if="${pageInfo.hasNext}" th:href="@{{request}(page=${pageInfo.number + 2},request=${requestUrl})}" class="w-fit">
+            <button class="text-white">Next</button>
+        </a>
+    </div>
+</div></body>
 </html>

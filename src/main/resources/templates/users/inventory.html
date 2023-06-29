@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-full bg-white">
+<head>
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.png}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title th:text="|Inventory - ${project}|"></title>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+</head>
+<body class="bg-neutral-800">
+<div th:replace="~{fragments/components :: sidenav}"></div>
+<div id="main" class="main-container">
+    <div th:replace="~{fragments/components :: header}"></div>
+    <div class="flex flex-col py-12 w-full space-y-12">
+        <div class="m-auto flex flex-col justify-center space-y-8">
+            <h2 class="text-6xl font-bold text-yellow-400">Inventory</h2>
+            <span th:text="${user.nickname}" class="font-bold text-yellow-400 text-4xl m-auto"></span>
+        </div>
+        <div th:if="${#lists.isEmpty(inventory)}" class="flex justify-between items-center bg-yellow-400 rounded-xl px-12 py-4 m-auto w-256">
+            <span class="font-bold">The inventory is empty...</span>
+            <a th:href="@{/items}" class="px-4 py-1.5 font-bold text-white bg-slate-950 rounded hover:bg-blue-700">Add new item</a>
+        </div>
+        <div th:unless="${#lists.isEmpty(inventory)}" class="grid grid-cols-6 justify-between w-256 m-auto bg-yellow-400 py-4 px-12 rounded-xl">
+            <div th:each="invItem : ${inventory}" class="flex flex-col justify-center">
+                <div class="w-[96px] h-[96px] m-auto">
+                    <div th:replace="~{fragments/components :: itemImage (${invItem.item})}"></div>
+                </div>
+                <div class="text-center">
+                    <a th:href="@{/item/{id}(id=${invItem.item.id})}">
+                        <span th:text="${invItem.item.nameEn}" class="hover:underline font-bold"></span>
+                    </a>
+                </div>
+                <div class="flex justify-around">
+                    <form th:action="@{/user/inventory/removeOne/{id}(id=${invItem.item.id})}" method="post" class="bg-black rounded-full">
+                        <button type="submit" class="text-white block m-auto w-[24px]">-</button>
+                    </form>
+                    <span th:text="${invItem.quantity}" class="font-bold"></span>
+                    <form th:action="@{/user/inventory/addOne/{id}(id=${invItem.item.id})}" method="post" class="bg-black rounded-full">
+                        <button type="submit" class="text-white block m-auto w-[24px]">+</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

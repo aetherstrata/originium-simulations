@@ -3,27 +3,23 @@ package dev.aest.ark.service;
 import dev.aest.ark.auth.OAuth2Credentials;
 import dev.aest.ark.model.LocalCredentials;
 import dev.aest.ark.model.User;
-import dev.aest.ark.repository.CredentialsRepository;
 import dev.aest.ark.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UserService
 {
     private final UserRepository userRepository;
-    private final CredentialsRepository credentialsRepository;
 
     /**
      * Retrieve a {@link User} from the database based on its ID.
@@ -64,10 +60,11 @@ public class UserService
      */
     @Transactional(readOnly = true)
     public List<User> getAllUsers() {
-        List<User> result = new ArrayList<>();
-        Iterable<User> iterable = this.userRepository.findAll();
-        for(User user : iterable)
-            result.add(user);
-        return result;
+        return this.userRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public Page<User> getAllUsersPage(Pageable pageable){
+        return this.userRepository.findAll(pageable);
     }
 }

@@ -40,7 +40,7 @@ public final class Item
     private List<Recipe> recipes;
 
     //Materialized view
-    @Formula("(SELECT i.droppable FROM item_capabilities i WHERE i.item_id=id)")
+    @Formula("(SELECT i.farmable FROM item_capabilities i WHERE i.item_id=id)")
     private Boolean canBeFarmed;
 
     @Formula("(SELECT i.craftable FROM item_capabilities i WHERE i.item_id=id)")

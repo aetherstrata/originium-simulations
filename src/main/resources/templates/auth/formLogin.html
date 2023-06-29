@@ -25,7 +25,6 @@
                                 class="form-input-field"
                         />
                     </label>
-
                     <label class="block">
                         <span class="form-input-title">Password</span>
                         <input
@@ -36,6 +35,7 @@
                                 class="form-input-field"
                         />
                     </label>
+                    <div th:if="${error}" th:text="#{auth.incorrectCredentials}" class="form-validation-error w-96 m-auto mt-4 text-center"></div>
                     <div class="flex justify-center">
                         <label class="inline-flex items-center mt-8">
                             <input

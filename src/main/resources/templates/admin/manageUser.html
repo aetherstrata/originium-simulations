@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-full bg-white">
+<head>
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.png}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title th:text="|Manage User - ${project}|">Items</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+</head>
+<body class="bg-neutral-800">
+<div th:replace="~{fragments/components :: sidenav}"></div>
+<div id="main" class="main-container">
+    <div th:replace="~{fragments/components :: header}"></div>
+    <div class="flex flex-col py-12 space-y-12 w-full">
+        <h2 class="text-3xl font-bold text-center text-yellow-400" th:text="${user.nickname}"></h2>
+        <div class="flex justify-between items-center bg-yellow-400 w-256 rounded-xl py-4 px-12 m-auto">
+            <div class="flex flex-col">
+                <span class="text-lg font-bold">Email</span>
+                <span th:text="${user.email}" class="text-lg"></span>
+            </div>
+            <div class="space-y-4">
+                <form th:action="@{/admin/user/{id}/clearInventoryItems(id=${user.id})}" method="post" class="w-fit ml-auto">
+                    <button type="submit" class="rounded-xl py-2 px-4 bg-red-700 hover:bg-blue-700 font-bold">Clear inventory items</button>
+                </form>
+                <form th:action="@{/admin/user/{id}/clearPlannedItems(id=${user.id})}" method="post" class="w-fit ml-auto">
+                    <button type="submit" class="rounded-xl py-2 px-4 bg-red-700 hover:bg-blue-700 font-bold">Clear planned items</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -5,7 +5,7 @@ import dev.aest.ark.model.User;
 import dev.aest.ark.service.CredentialsService;
 import dev.aest.ark.service.UserService;
 import dev.aest.ark.validation.CredentialsValidator;
-import dev.aest.ark.validation.UserValidator;
+import dev.aest.ark.validation.DuplicateUserValidator;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AuthController
 {
     private final UserService userService;
-    private final UserValidator userValidator;
+    private final DuplicateUserValidator duplicateUserValidator;
 
     private final CredentialsService credentialsService;
     private final CredentialsValidator credentialsValidator;
@@ -40,9 +40,10 @@ public class AuthController
             @Valid @ModelAttribute("credentials") final LocalCredentials credentials,
             BindingResult credentialsBinding,
             Model model) {
-        this.userValidator.validate(user, userBinding);
+        this.duplicateUserValidator.validate(user, userBinding);
         this.credentialsValidator.validate(credentials, credentialsBinding);
         if(!userBinding.hasErrors() && !credentialsBinding.hasErrors()) {
+            user.setNickname(credentials.getUsername());
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
             model.addAttribute("email", user.getEmail());

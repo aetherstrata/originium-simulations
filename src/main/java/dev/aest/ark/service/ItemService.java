@@ -26,7 +26,6 @@ public class ItemService
         Item item = this.itemRepository.findById(id).orElse(null);
         if (item == null) return null;
         Hibernate.initialize(item.getRecipes());
-        Hibernate.initialize(item.getRecipes());
         Hibernate.initialize(item.getSources());
         return item;
     }

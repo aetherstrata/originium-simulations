@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 public class ItemController
 {
+    public static final String NOT_FOUND = "items/notFound";
+
     private final ItemService itemService;
 
     @GetMapping("/items")
@@ -29,14 +31,12 @@ public class ItemController
         return "items/allItems";
     }
 
-    @GetMapping("/items/{id}")
+    @GetMapping("/item/{id}")
     public String getItemDetails(
             @PathVariable("id") final Long id,
             Model model){
         Item item = itemService.getFullItem(id);
-        if (item == null){
-            return "items/notFound";
-        }
+        if (item == null) return NOT_FOUND;
         model.addAttribute("item", item);
         return "items/itemDetails";
     }

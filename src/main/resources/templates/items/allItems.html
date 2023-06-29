@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-full bg-white">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" class="h-full bg-neutral-800">
 <head>
     <link rel="icon" type="image/x-icon" th:href="@{/favicon.png}"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -15,6 +15,7 @@
         <form th:action="@{/items}" class="flex space-x-4">
             <label>
                 <select name="type" class="form-input-field">
+                    <option value="all">All</option>
                     <option value="battle-records">Battle records</option>
                     <option value="carbon">Carbon</option>
                     <option value="chip">Chips</option>
@@ -32,23 +33,27 @@
         </form>
     </div>
     <div class="flex flex-col justify-center space-y-4 bg-neutral-800 pb-12">
-        <div th:each="item : ${items}" class="flex rounded-xl bg-yellow-400 m-auto pt-2 pb-4">
-            <div class="w-[96px] h-[96px]">
-                <div th:replace="~{fragments/components :: itemImage (${item})}"></div>
-            </div>
-            <div class="flex flex-col w-256 px-12">
-                <div class="flex justify-between">
-                    <a th:href="@{/items/{id}(id=${item.id})}">
-                        <span th:text="${item.nameEn}" class="font-bold text-xl hover:text-blue-700"></span>
-                    </a>
-                    <div class="space-x-2">
-                        <span th:if="${item.canBeCrafted}" class="rounded bg-blue-700 text-white px-1">Craftable</span>
-                        <span th:if="${item.getCanBeFarmed}" class="rounded bg-blue-700 text-white px-1">Farmable</span>
-                    </div>
+        <div th:each="item : ${items}" class="m-auto flex space-x-4 items-center">
+            <a sec:authorize="isAuthenticated()" th:href="@{/user/inventory/add/{id}(id=${item.id})}" class="px-4 py-1.5 font-bold bg-yellow-400 rounded hover:bg-blue-700">Store</a>
+            <div class="flex rounded-xl bg-yellow-400 pt-2 pb-4">
+                <div class="w-[96px] h-[96px]">
+                    <div th:replace="~{fragments/components :: itemImage (${item})}"></div>
                 </div>
-                <div class="bg-slate-950 h-[2px]"></div>
-                <span th:text="${item.description}"></span>
+                <div class="flex flex-col w-256 px-12">
+                    <div class="flex justify-between">
+                        <a th:href="@{/item/{id}(id=${item.id})}">
+                            <span th:text="${item.nameEn}" class="font-bold text-xl hover:text-blue-700"></span>
+                        </a>
+                        <div class="space-x-2">
+                            <span th:if="${item.canBeCrafted}" class="rounded bg-blue-700 text-white px-1">Craftable</span>
+                            <span th:if="${item.getCanBeFarmed}" class="rounded bg-blue-700 text-white px-1">Farmable</span>
+                        </div>
+                    </div>
+                    <div class="bg-slate-950 h-[2px]"></div>
+                    <span th:text="${item.description}"></span>
+                </div>
             </div>
+            <a sec:authorize="isAuthenticated()" th:href="@{/user/planner/add/{id}(id=${item.id})}" class="px-4 py-1.5 font-bold bg-yellow-400 rounded hover:bg-blue-700">Plan</a>
         </div>
     </div>
 </div>

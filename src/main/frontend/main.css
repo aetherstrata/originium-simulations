@@ -14,7 +14,7 @@
     }
 
     .form-validation-error {
-        @apply mt-1 p-2 rounded-xl text-gray-900 bg-red-300;
+        @apply mt-1 p-2 rounded text-gray-900 bg-red-300;
     }
 
     .form-input-title {

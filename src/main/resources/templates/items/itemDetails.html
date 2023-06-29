@@ -45,7 +45,7 @@
                                 <div th:replace="~{fragments/components :: itemImage (${component.ingredient})}"></div>
                             </div>
                             <span th:text="|${component.quantity}x|"></span>&nbsp;
-                            <a th:href="@{/items/{id}(id=${component.ingredient.id})}">
+                            <a th:href="@{/item/{id}(id=${component.ingredient.id})}">
                                 <span th:text="${component.ingredient.nameEn}" class="hover:underline"></span>
                             </a>
                         </div>

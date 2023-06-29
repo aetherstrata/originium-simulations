@@ -1,6 +1,8 @@
 package dev.aest.ark.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 @Data
@@ -18,5 +20,7 @@ public final class InventoryItem
     @ManyToOne
     private Item item;
 
+    @NotNull
+    @Positive
     private Integer quantity;
 }

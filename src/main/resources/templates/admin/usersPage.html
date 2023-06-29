@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-full bg-white">
+<head>
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.png}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title th:text="|Users - ${project}|">Items</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+</head>
+<body class="bg-neutral-800">
+<div th:replace="~{fragments/components :: sidenav}"></div>
+<div id="main" class="main-container">
+    <div th:replace="~{fragments/components :: header}"></div>
+    <div class="flex flex-col py-12 space-y-12 w-full">
+        <h2 class="text-3xl font-bold text-center text-yellow-400">User list</h2>
+        <div class="grid grid-cols-5 gap-4 rounded-xl bg-yellow-400 px-12 py-4 max-w-6xl m-auto ">
+            <div th:each="user : ${users}" class="flex flex-col">
+                <a th:href="@{/admin/user/{id}(id=${user.id})}">
+                    <span th:text="${user.nickname}" class="font-bold text-xl hover:underline"></span>
+                </a>
+                <span th:text="${user.email}" class="text-lg"></span>
+            </div>
+        </div>
+        <div th:replace="~{fragments/components :: pageTurner (${pageInfo})}"></div>
+    </div>
+</div>
+</body>
+</html>

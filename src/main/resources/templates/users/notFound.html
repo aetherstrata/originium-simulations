@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-full bg-white">
 <head>
-    <link rel="icon" type="image/x-icon" th:href="@{/favicon.png}"/>
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title th:text="|${project}|">Items</title>
+    <title th:text="|404 - ${project}|">Items</title>
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
 </head>
 <body class="bg-neutral-800">
 <div th:replace="~{fragments/components :: sidenav}"></div>
 <div id="main" class="main-container">
     <div th:replace="~{fragments/components :: header}"></div>
-
+    <div class="flex flex-col place-content-center py-48">
+        <span class="m-auto text-6xl font-bold text-yellow-400">404</span>
+        <span class="m-auto pt-12 text-2xl font-bold text-white">User not found</span>
+    </div>
+</div>
 </body>
 </html>
