@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-full bg-white">
+<head>
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.png}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title th:text="|${item.nameEn} - ${project}|">Items</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+</head>
+<body class="bg-neutral-800">
+<div th:replace="~{fragments/components :: sidenav}"></div>
+<div id="main" class="main-container">
+    <div th:replace="~{fragments/components :: header}"></div>
+    <div class="flex flex-col w-full py-24 space-y-8 bg-neutral-800">
+        <span th:text="${item.nameEn}" class="m-auto text-4xl text-yellow-400 font-bold"></span>
+        <div class="m-auto w-[190px] h-[190px]">
+            <div th:replace="~{fragments/components :: itemImage (${item})}"></div>
+        </div>
+        <div class="flex flex-col w-256 px-12 py-4 rounded-xl bg-yellow-400 m-auto space-y-4">
+            <div>
+                <span class="font-bold text-xl">Description</span>
+                <div class="bg-slate-950 h-[2px]"></div>
+                <span th:text="${item.description}"></span>
+            </div>
+            <div>
+                <span class="font-bold text-xl">Usage</span>
+                <div class="bg-slate-950 h-[2px]"></div>
+                <span th:text="${item.usage}"></span>
+            </div>
+        </div>
+        <form th:action="@{/user/planner/add/{id}(id=${item.id})}" method="post" class="px-12 py-4 rounded-xl bg-yellow-400 m-auto w-256">
+            <div class="flex items-center justify-between">
+                <span class="font-bold text-xl">How many would you like to add?</span>
+                <div class="flex items-center space-x-4">
+                    <label>
+                        <input
+                                th:field="${planned_item.quantity}"
+                                class="form-input-field"
+                                required
+                                type="number"
+                                value="1"
+                                min="1"
+                        >
+                    </label>
+                    <label>
+                        <input
+                                class="bg-black text-white px-4 py-2 hover:bg-blue-700 rounded font-bold"
+                                type="submit"
+                                value="Add">
+                    </label>
+                </div>
+            </div>
+            <div class="form-validation-error mt-4" th:if="${#fields.hasErrors('planned_item.quantity')}" th:errors="${planned_item.quantity}"></div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

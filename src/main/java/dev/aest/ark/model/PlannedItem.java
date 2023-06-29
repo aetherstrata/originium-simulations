@@ -4,8 +4,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "planned_items", uniqueConstraints = { @UniqueConstraint(columnNames = {"user_id", "item_id"})})
 public final class PlannedItem
@@ -22,5 +24,10 @@ public final class PlannedItem
 
     @NotNull
     @Positive
-    private Integer quantity;
+    private Integer quantity = 0;
+
+    public PlannedItem(User user, Item item){
+        this.user = user;
+        this.item = item;
+    }
 }

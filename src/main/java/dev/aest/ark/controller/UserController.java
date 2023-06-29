@@ -2,7 +2,9 @@ package dev.aest.ark.controller;
 
 import dev.aest.ark.model.InventoryItem;
 import dev.aest.ark.model.Item;
+import dev.aest.ark.model.PlannedItem;
 import dev.aest.ark.model.User;
+import dev.aest.ark.projection.MissingItem;
 import dev.aest.ark.service.InventoryItemService;
 import dev.aest.ark.service.ItemService;
 import dev.aest.ark.service.PlannedItemService;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -36,6 +40,72 @@ public class UserController
         model.addAttribute("inventory_count", inventoryItemService.getInventoryItemCount(user));
         model.addAttribute("planned_count", plannedItemService.getPlannedItemCount(user));
         return "users/index";
+    }
+
+    @GetMapping("/user/planner")
+    public String getUserPlannerPage(Model model){
+        User user = userService.getCurrentUser();
+        if (user == null) return NOT_FOUND;
+        List<MissingItem> missing = plannedItemService.getMissingItems(user);
+        model.addAttribute("user", user);
+        model.addAttribute("planner", plannedItemService.getUserPlannedItems(user));
+        model.addAttribute("missing", missing);
+        return "users/planner";
+    }
+
+    @GetMapping("/user/planner/add/{id}")
+    public String getPlannerItemAddPage(
+            @PathVariable("id") final Long id,
+            Model model){
+        Item item = itemService.getItem(id);
+        if (item == null) return ItemController.NOT_FOUND;
+        PlannedItem newItem = new PlannedItem();
+        newItem.setItem(item);
+        model.addAttribute("item", item);
+        model.addAttribute("planned_item", newItem);
+        return "users/addToPlanner";
+    }
+
+    @PostMapping("/user/planner/add/{id}")
+    public String addItemToPlanner(
+            @PathVariable("id") final Long id,
+            @Valid @ModelAttribute("planned_item") PlannedItem newItem,
+            BindingResult bindingResult,
+            Model model){
+        User user = userService.getCurrentUser();
+        Item item = itemService.getItem(id);
+        if (item == null) return ItemController.NOT_FOUND;
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("item", item);
+            return "users/addToPlanner";
+        }
+        PlannedItem storedItem = plannedItemService.getUserPlannedItem(user, item);
+        if (storedItem == null) storedItem = new PlannedItem(user, item);
+        plannedItemService.increaseItemBy(storedItem, newItem.getQuantity());
+        return "redirect:/user/planner";
+    }
+
+    @PostMapping("/user/planner/addOne/{id}")
+    public String addOneToPlanner(
+            @PathVariable("id") final Long id){
+        User user = userService.getCurrentUser();
+        Item item = itemService.getItem(id);
+        if (item == null) return ItemController.NOT_FOUND;
+        PlannedItem storedItem = plannedItemService.getUserPlannedItem(user, item);
+        if (storedItem == null) storedItem = new PlannedItem(user, item);
+        plannedItemService.increaseItemBy(storedItem, 1);
+        return "redirect:/user/planner";
+    }
+
+    @PostMapping("/user/planner/removeOne/{id}")
+    public String removeOneToPlanner(
+            @PathVariable("id") final Long id){
+        User user = userService.getCurrentUser();
+        Item item = itemService.getItem(id);
+        if (item == null) return ItemController.NOT_FOUND;
+        PlannedItem storedItem = plannedItemService.getUserPlannedItem(user, item);
+        if (storedItem != null) plannedItemService.decreaseItemBy(storedItem, 1);
+        return "redirect:/user/planner";
     }
 
     @GetMapping("/user/inventory")

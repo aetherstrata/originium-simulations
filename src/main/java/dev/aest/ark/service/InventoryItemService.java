@@ -38,11 +38,18 @@ public class InventoryItemService
     }
 
     @Transactional
-    public void saveItem(InventoryItem inventoryItem) {
-        this.inventoryItemRepository.save(inventoryItem);
+    public void decreaseItemBy(InventoryItem inventoryItem, int qty){
+        if (inventoryItem.getQuantity() <= qty){
+            inventoryItemRepository.delete(inventoryItem);
+        } else {
+            inventoryItem.setQuantity(inventoryItem.getQuantity() - qty);
+            inventoryItemRepository.save(inventoryItem);
+        }
     }
 
-    public void deleteItem(InventoryItem inventoryItem) {
-        this.inventoryItemRepository.delete(inventoryItem);
+    @Transactional
+    public void increaseItemBy(InventoryItem inventoryItem, int qty){
+        inventoryItem.setQuantity(inventoryItem.getQuantity() + qty);
+        inventoryItemRepository.save(inventoryItem);
     }
 }
