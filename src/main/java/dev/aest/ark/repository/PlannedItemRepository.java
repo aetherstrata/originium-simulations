@@ -1,5 +1,6 @@
 package dev.aest.ark.repository;
 
+import dev.aest.ark.model.Item;
 import dev.aest.ark.model.PlannedItem;
 import dev.aest.ark.projection.MissingItem;
 import dev.aest.ark.model.User;
@@ -10,6 +11,8 @@ import java.util.List;
 
 public interface PlannedItemRepository extends JpaRepository<PlannedItem, Long>
 {
+    PlannedItem findByUserAndItem(User user, Item item);
+
     List<PlannedItem> findAllByUser(User user);
 
     void deleteAllByUser(User user);
