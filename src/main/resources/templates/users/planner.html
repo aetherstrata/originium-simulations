@@ -24,13 +24,15 @@
             <div class="w-full h-[2px] bg-slate-950 mb-4"></div>
             <div class="grid grid-cols-6 justify-between">
                 <div th:each="missingItem : ${missing}" class="flex flex-col justify-between">
-                    <div class="w-[96px] h-[96px] m-auto">
-                        <div th:replace="~{fragments/components :: itemImage (${missingItem.item})}"></div>
-                    </div>
-                    <div class="text-center">
-                        <a th:href="@{/item/{id}(id=${missingItem.item.id})}">
-                            <span th:text="${missingItem.item.nameEn}" class="hover:underline font-bold"></span>
-                        </a>
+                    <div>
+                        <div class="w-[96px] h-[96px] m-auto">
+                            <div th:replace="~{fragments/components :: itemImage (${missingItem.item})}"></div>
+                        </div>
+                        <div class="text-center">
+                            <a th:href="@{/item/{id}(id=${missingItem.item.id})}">
+                                <span th:text="${missingItem.item.nameEn}" class="hover:underline font-bold"></span>
+                            </a>
+                        </div>
                     </div>
                     <span th:text="${missingItem.quantity}" class="font-bold text-center"></span>
                 </div>
