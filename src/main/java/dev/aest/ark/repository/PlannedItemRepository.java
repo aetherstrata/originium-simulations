@@ -20,6 +20,13 @@ public interface PlannedItemRepository extends JpaRepository<PlannedItem, Long>
     @Query("SELECT SUM(i.quantity) FROM PlannedItem i WHERE i.user=:user")
     Long countItemsByUser(User user);
 
-    @Query("SELECT NEW dev.aest.ark.projection.MissingItem(i, plan.quantity - COALESCE(inv.quantity,0)) FROM PlannedItem plan JOIN Item i ON plan.item=i LEFT JOIN InventoryItem inv ON plan.item=inv.item WHERE plan.user=:user AND (plan.quantity>=inv.quantity OR inv IS NULL) ORDER BY i.id")
+    @Query("""
+            SELECT NEW dev.aest.ark.projection.MissingItem(i, plan.quantity - COALESCE(inv.quantity,0))
+            FROM PlannedItem plan
+            JOIN Item i ON plan.item=i
+            LEFT JOIN InventoryItem inv ON plan.item=inv.item
+            WHERE plan.user=:user AND (plan.quantity>=inv.quantity OR inv IS NULL)
+            ORDER BY i.id
+            """)
     List<MissingItem> getMissingItems(User user);
 }
