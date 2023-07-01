@@ -23,7 +23,7 @@ public interface PlannedItemRepository extends JpaRepository<PlannedItem, Long>
     @Query("""
             SELECT NEW dev.aest.ark.projection.MissingItem(i, plan.quantity - COALESCE(inv.quantity,0))
             FROM PlannedItem plan
-            JOIN Item i ON plan.item=i
+            INNER JOIN Item i ON plan.item=i
             LEFT JOIN InventoryItem inv ON plan.item=inv.item AND plan.user=inv.user
             WHERE plan.user=:user AND (inv IS NULL OR plan.quantity > inv.quantity)
             ORDER BY i.id
