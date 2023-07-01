@@ -5,9 +5,9 @@ import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 @Data
-public class AddItemForm
+public class AddItemFormData
 {
     @NotNull
     @Positive(message = "{number.positive}")
-    private Integer quantity;
+    private Integer quantity = 1;
 }

@@ -4,7 +4,7 @@ import dev.aest.ark.entity.InventoryItem;
 import dev.aest.ark.entity.Item;
 import dev.aest.ark.entity.PlannedItem;
 import dev.aest.ark.entity.User;
-import dev.aest.ark.model.AddItemForm;
+import dev.aest.ark.model.AddItemFormData;
 import dev.aest.ark.model.MissingItem;
 import dev.aest.ark.service.InventoryItemService;
 import dev.aest.ark.service.ItemService;
@@ -61,14 +61,14 @@ public class UserController
         Item item = itemService.getItem(id);
         if (item == null) return ItemController.NOT_FOUND;
         model.addAttribute("item", item);
-        model.addAttribute("form", new AddItemForm());
+        model.addAttribute("form", new AddItemFormData());
         return "users/addToPlanner";
     }
 
     @PostMapping("/user/planner/add/{id}")
     public String addItemToPlanner(
             @PathVariable("id") final Long id,
-            @Valid @ModelAttribute("form") AddItemForm addItemForm,
+            @Valid @ModelAttribute("form") AddItemFormData formData,
             BindingResult bindingResult,
             Model model){
         Item item = itemService.getItem(id);
@@ -80,7 +80,7 @@ public class UserController
         User user = userService.getCurrentUser();
         PlannedItem storedItem = plannedItemService.getUserPlannedItem(user, item);
         if (storedItem == null) storedItem = new PlannedItem(user, item);
-        plannedItemService.increaseItemBy(storedItem, addItemForm.getQuantity());
+        plannedItemService.increaseItemBy(storedItem, formData.getQuantity());
         return "redirect:/user/planner";
     }
 
@@ -122,14 +122,14 @@ public class UserController
         Item item = itemService.getItem(id);
         if (item == null) return ItemController.NOT_FOUND;
         model.addAttribute("item", item);
-        model.addAttribute("form", new AddItemForm());
+        model.addAttribute("form", new AddItemFormData());
         return "users/addToInventory";
     }
 
     @PostMapping("/user/inventory/add/{id}")
     public String addItemToInventory(
             @PathVariable("id") final Long id,
-            @Valid @ModelAttribute("form") AddItemForm addItemForm,
+            @Valid @ModelAttribute("form") AddItemFormData formData,
             BindingResult bindingResult,
             Model model){
         Item item = itemService.getItem(id);
@@ -141,7 +141,7 @@ public class UserController
         User user = userService.getCurrentUser();
         InventoryItem storedItem = inventoryItemService.getUserInventoryItem(user, item);
         if (storedItem == null) storedItem = new InventoryItem(user, item);
-        inventoryItemService.increaseItemBy(storedItem, addItemForm.getQuantity());
+        inventoryItemService.increaseItemBy(storedItem, formData.getQuantity());
         return "redirect:/user/inventory";
     }
 
