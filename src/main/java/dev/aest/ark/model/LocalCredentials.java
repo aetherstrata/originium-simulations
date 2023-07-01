@@ -3,8 +3,11 @@ package dev.aest.ark.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.NaturalId;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +15,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "credentials")
 public final class LocalCredentials implements UserDetails
@@ -29,6 +33,7 @@ public final class LocalCredentials implements UserDetails
     @JoinColumn(name = "user_id")
     private User user;
 
+    @NaturalId
     @Column(unique = true)
     @NotBlank
     @Pattern(regexp = "^[A-Za-z0-9_.]+$", message = "{username.incorrect}")
@@ -67,5 +72,20 @@ public final class LocalCredentials implements UserDetails
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+
+        LocalCredentials that = (LocalCredentials) o;
+
+        return username.equals(that.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return username.hashCode();
     }
 }

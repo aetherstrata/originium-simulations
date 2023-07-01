@@ -3,12 +3,15 @@ package dev.aest.ark.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
+import org.hibernate.annotations.NaturalId;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "users")
 public final class User
@@ -17,6 +20,7 @@ public final class User
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @NaturalId
     @Column(unique = true)
     @Email
     @NotBlank
@@ -24,8 +28,8 @@ public final class User
 
     private String nickname;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private LocalCredentials credentials;
 
     @OneToMany(mappedBy = "user", orphanRemoval = true)
@@ -33,4 +37,19 @@ public final class User
 
     @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<PlannedItem> plannedItems = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+
+        User other = (User) o;
+
+        return email.equals(other.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return email.hashCode();
+    }
 }
