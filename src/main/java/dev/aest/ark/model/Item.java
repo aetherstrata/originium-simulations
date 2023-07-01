@@ -1,13 +1,17 @@
 package dev.aest.ark.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Formula;
 
 import java.util.List;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "items")
 public final class Item
@@ -46,11 +50,26 @@ public final class Item
     @Formula("(SELECT i.craftable FROM item_capabilities i WHERE i.item_id=id)")
     private Boolean canBeCrafted;
 
-    public String getBackgroundImage(){
+    public String getBackgroundImage() {
         return "/images/bg/item-%d.png".formatted(level);
     }
 
-    public String getForegroundImage(){
+    public String getForegroundImage() {
         return "/images/item/%d.png".formatted(id);
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+
+        Item other = (Item) o;
+
+        return this.id != null && this.id.equals(other.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

@@ -1,13 +1,18 @@
 package dev.aest.ark.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.Formula;
 
-@Data
+import java.util.Objects;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "drops", uniqueConstraints = @UniqueConstraint(columnNames = {"stage_id", "item_id"}))
-public class Drop
+public final class Drop
 {
     @Id
     private Long id;
@@ -26,4 +31,19 @@ public class Drop
 
     @Formula("(SELECT CAST(d.quantity AS FLOAT) / d.times FROM drops d WHERE d.id=id)")
     private Double dropRate;
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+
+        Drop other = (Drop) o;
+
+        return this.id != null && this.id.equals(other.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
