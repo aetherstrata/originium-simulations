@@ -1,43 +1,36 @@
-package dev.aest.ark.model;
+package dev.aest.ark.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.Hibernate;
-import org.hibernate.annotations.Formula;
 
 import java.util.Objects;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "drops", uniqueConstraints = @UniqueConstraint(columnNames = {"stage_id", "item_id"}))
-public final class Drop
+@Table(name = "ingredients", uniqueConstraints = @UniqueConstraint(columnNames = {"recipe_id", "ingredient_id"}))
+public final class Ingredient
 {
     @Id
     private Long id;
 
     @ManyToOne
-    private GameStage stage;
+    private Recipe recipe;
 
     @ManyToOne
-    private Item item;
+    private Item ingredient;
 
-    private Integer times;
-
+    @Column(nullable = false)
     private Integer quantity;
-
-    private Double standardDeviation;
-
-    @Formula("(SELECT CAST(d.quantity AS FLOAT) / d.times FROM drops d WHERE d.id=id)")
-    private Double dropRate;
 
     @Override
     public boolean equals(Object o){
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
 
-        Drop other = (Drop) o;
+        Ingredient other = (Ingredient) o;
 
         return this.id != null && this.id.equals(other.id);
     }

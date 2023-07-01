@@ -1,4 +1,4 @@
-package dev.aest.ark.model;
+package dev.aest.ark.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

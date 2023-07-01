@@ -1,5 +1,6 @@
-package dev.aest.ark.model;
+package dev.aest.ark.entity;
 
+import dev.aest.ark.model.ItemType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
