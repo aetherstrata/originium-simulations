@@ -1,6 +1,6 @@
 package dev.aest.ark.repository;
 
-import dev.aest.ark.model.User;
+import dev.aest.ark.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

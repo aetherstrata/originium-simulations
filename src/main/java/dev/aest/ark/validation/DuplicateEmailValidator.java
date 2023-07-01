@@ -1,6 +1,6 @@
 package dev.aest.ark.validation;
 
-import dev.aest.ark.model.User;
+import dev.aest.ark.entity.User;
 import dev.aest.ark.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

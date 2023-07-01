@@ -1,6 +1,6 @@
 package dev.aest.ark.auth;
 
-import dev.aest.ark.model.User;
+import dev.aest.ark.entity.User;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

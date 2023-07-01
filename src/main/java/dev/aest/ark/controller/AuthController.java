@@ -1,7 +1,7 @@
 package dev.aest.ark.controller;
 
-import dev.aest.ark.model.LocalCredentials;
-import dev.aest.ark.model.User;
+import dev.aest.ark.entity.LocalCredentials;
+import dev.aest.ark.entity.User;
 import dev.aest.ark.service.CredentialsService;
 import dev.aest.ark.validation.DuplicateUsernameValidator;
 import dev.aest.ark.validation.DuplicateEmailValidator;

@@ -1,9 +1,9 @@
 package dev.aest.ark.repository;
 
-import dev.aest.ark.model.Item;
-import dev.aest.ark.model.PlannedItem;
-import dev.aest.ark.projection.MissingItem;
-import dev.aest.ark.model.User;
+import dev.aest.ark.entity.Item;
+import dev.aest.ark.entity.PlannedItem;
+import dev.aest.ark.model.MissingItem;
+import dev.aest.ark.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -21,7 +21,7 @@ public interface PlannedItemRepository extends JpaRepository<PlannedItem, Long>
     Long countItemsByUser(User user);
 
     @Query("""
-            SELECT NEW dev.aest.ark.projection.MissingItem(i, plan.quantity - COALESCE(inv.quantity,0))
+            SELECT NEW dev.aest.ark.model.MissingItem(i, plan.quantity - COALESCE(inv.quantity,0))
             FROM PlannedItem plan
             INNER JOIN Item i ON plan.item=i
             LEFT JOIN InventoryItem inv ON plan.item=inv.item AND plan.user=inv.user

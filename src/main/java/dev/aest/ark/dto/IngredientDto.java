@@ -1,7 +1,7 @@
 package dev.aest.ark.dto;
 
-import dev.aest.ark.model.Ingredient;
-import dev.aest.ark.model.Item;
+import dev.aest.ark.entity.Ingredient;
+import dev.aest.ark.entity.Item;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

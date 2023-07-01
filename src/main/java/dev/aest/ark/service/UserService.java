@@ -1,8 +1,8 @@
 package dev.aest.ark.service;
 
 import dev.aest.ark.auth.OAuth2Credentials;
-import dev.aest.ark.model.LocalCredentials;
-import dev.aest.ark.model.User;
+import dev.aest.ark.entity.LocalCredentials;
+import dev.aest.ark.entity.User;
 import dev.aest.ark.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;

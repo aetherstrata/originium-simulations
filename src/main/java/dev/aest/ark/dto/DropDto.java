@@ -1,7 +1,7 @@
 package dev.aest.ark.dto;
 
-import dev.aest.ark.model.Drop;
-import dev.aest.ark.model.GameStage;
+import dev.aest.ark.entity.Drop;
+import dev.aest.ark.entity.GameStage;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

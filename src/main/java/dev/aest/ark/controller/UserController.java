@@ -1,10 +1,11 @@
 package dev.aest.ark.controller;
 
-import dev.aest.ark.model.InventoryItem;
-import dev.aest.ark.model.Item;
-import dev.aest.ark.model.PlannedItem;
-import dev.aest.ark.model.User;
-import dev.aest.ark.projection.MissingItem;
+import dev.aest.ark.entity.InventoryItem;
+import dev.aest.ark.entity.Item;
+import dev.aest.ark.entity.PlannedItem;
+import dev.aest.ark.entity.User;
+import dev.aest.ark.model.AddItemForm;
+import dev.aest.ark.model.MissingItem;
 import dev.aest.ark.service.InventoryItemService;
 import dev.aest.ark.service.ItemService;
 import dev.aest.ark.service.PlannedItemService;
@@ -59,38 +60,36 @@ public class UserController
             Model model){
         Item item = itemService.getItem(id);
         if (item == null) return ItemController.NOT_FOUND;
-        PlannedItem newItem = new PlannedItem();
-        newItem.setItem(item);
         model.addAttribute("item", item);
-        model.addAttribute("planned_item", newItem);
+        model.addAttribute("form", new AddItemForm());
         return "users/addToPlanner";
     }
 
     @PostMapping("/user/planner/add/{id}")
     public String addItemToPlanner(
             @PathVariable("id") final Long id,
-            @Valid @ModelAttribute("planned_item") PlannedItem newItem,
+            @Valid @ModelAttribute("form") AddItemForm addItemForm,
             BindingResult bindingResult,
             Model model){
-        User user = userService.getCurrentUser();
         Item item = itemService.getItem(id);
         if (item == null) return ItemController.NOT_FOUND;
         if (bindingResult.hasErrors()) {
             model.addAttribute("item", item);
             return "users/addToPlanner";
         }
+        User user = userService.getCurrentUser();
         PlannedItem storedItem = plannedItemService.getUserPlannedItem(user, item);
         if (storedItem == null) storedItem = new PlannedItem(user, item);
-        plannedItemService.increaseItemBy(storedItem, newItem.getQuantity());
+        plannedItemService.increaseItemBy(storedItem, addItemForm.getQuantity());
         return "redirect:/user/planner";
     }
 
     @PostMapping("/user/planner/addOne/{id}")
     public String addOneToPlanner(
             @PathVariable("id") final Long id){
-        User user = userService.getCurrentUser();
         Item item = itemService.getItem(id);
         if (item == null) return ItemController.NOT_FOUND;
+        User user = userService.getCurrentUser();
         PlannedItem storedItem = plannedItemService.getUserPlannedItem(user, item);
         if (storedItem == null) storedItem = new PlannedItem(user, item);
         plannedItemService.increaseItemBy(storedItem, 1);
@@ -100,10 +99,9 @@ public class UserController
     @PostMapping("/user/planner/removeOne/{id}")
     public String removeOneToPlanner(
             @PathVariable("id") final Long id){
-        User user = userService.getCurrentUser();
         Item item = itemService.getItem(id);
         if (item == null) return ItemController.NOT_FOUND;
-        PlannedItem storedItem = plannedItemService.getUserPlannedItem(user, item);
+        PlannedItem storedItem = plannedItemService.getUserPlannedItem(userService.getCurrentUser(), item);
         if (storedItem != null) plannedItemService.decreaseItemBy(storedItem, 1);
         return "redirect:/user/planner";
     }
@@ -123,38 +121,36 @@ public class UserController
             Model model){
         Item item = itemService.getItem(id);
         if (item == null) return ItemController.NOT_FOUND;
-        InventoryItem newItem = new InventoryItem();
-        newItem.setItem(item);
         model.addAttribute("item", item);
-        model.addAttribute("inventory_item", newItem);
+        model.addAttribute("form", new AddItemForm());
         return "users/addToInventory";
     }
 
     @PostMapping("/user/inventory/add/{id}")
     public String addItemToInventory(
             @PathVariable("id") final Long id,
-            @Valid @ModelAttribute("inventory_item") InventoryItem newItem,
+            @Valid @ModelAttribute("form") AddItemForm addItemForm,
             BindingResult bindingResult,
             Model model){
-        User user = userService.getCurrentUser();
         Item item = itemService.getItem(id);
         if (item == null) return ItemController.NOT_FOUND;
         if (bindingResult.hasErrors()) {
             model.addAttribute("item", item);
             return "users/addToInventory";
         }
+        User user = userService.getCurrentUser();
         InventoryItem storedItem = inventoryItemService.getUserInventoryItem(user, item);
         if (storedItem == null) storedItem = new InventoryItem(user, item);
-        inventoryItemService.increaseItemBy(storedItem, newItem.getQuantity());
+        inventoryItemService.increaseItemBy(storedItem, addItemForm.getQuantity());
         return "redirect:/user/inventory";
     }
 
     @PostMapping("/user/inventory/addOne/{id}")
     public String addOneToInventory(
             @PathVariable("id") final Long id){
-        User user = userService.getCurrentUser();
         Item item = itemService.getItem(id);
         if (item == null) return ItemController.NOT_FOUND;
+        User user = userService.getCurrentUser();
         InventoryItem storedItem = inventoryItemService.getUserInventoryItem(user, item);
         if (storedItem == null) storedItem = new InventoryItem(user, item);
         inventoryItemService.increaseItemBy(storedItem, 1);
@@ -164,10 +160,9 @@ public class UserController
     @PostMapping("/user/inventory/removeOne/{id}")
     public String removeOneToInventory(
             @PathVariable("id") final Long id){
-        User user = userService.getCurrentUser();
         Item item = itemService.getItem(id);
         if (item == null) return ItemController.NOT_FOUND;
-        InventoryItem storedItem = inventoryItemService.getUserInventoryItem(user, item);
+        InventoryItem storedItem = inventoryItemService.getUserInventoryItem(userService.getCurrentUser(), item);
         if (storedItem != null) inventoryItemService.decreaseItemBy(storedItem, 1);
         return "redirect:/user/inventory";
     }

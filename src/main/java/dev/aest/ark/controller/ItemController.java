@@ -1,6 +1,6 @@
 package dev.aest.ark.controller;
 
-import dev.aest.ark.model.Item;
+import dev.aest.ark.entity.Item;
 import dev.aest.ark.model.ItemType;
 import dev.aest.ark.service.ItemService;
 import lombok.RequiredArgsConstructor;

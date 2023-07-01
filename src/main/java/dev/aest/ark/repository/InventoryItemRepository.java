@@ -1,8 +1,8 @@
 package dev.aest.ark.repository;
 
-import dev.aest.ark.model.InventoryItem;
-import dev.aest.ark.model.Item;
-import dev.aest.ark.model.User;
+import dev.aest.ark.entity.InventoryItem;
+import dev.aest.ark.entity.Item;
+import dev.aest.ark.entity.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 

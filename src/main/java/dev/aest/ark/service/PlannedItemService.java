@@ -1,7 +1,9 @@
 package dev.aest.ark.service;
 
-import dev.aest.ark.model.*;
-import dev.aest.ark.projection.MissingItem;
+import dev.aest.ark.entity.Item;
+import dev.aest.ark.entity.PlannedItem;
+import dev.aest.ark.entity.User;
+import dev.aest.ark.model.MissingItem;
 import dev.aest.ark.repository.PlannedItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

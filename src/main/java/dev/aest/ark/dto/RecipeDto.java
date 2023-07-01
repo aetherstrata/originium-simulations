@@ -1,6 +1,6 @@
 package dev.aest.ark.dto;
 
-import dev.aest.ark.model.Recipe;
+import dev.aest.ark.entity.Recipe;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

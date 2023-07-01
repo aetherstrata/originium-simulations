@@ -1,6 +1,6 @@
 package dev.aest.ark.dto;
 
-import dev.aest.ark.model.Item;
+import dev.aest.ark.entity.Item;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

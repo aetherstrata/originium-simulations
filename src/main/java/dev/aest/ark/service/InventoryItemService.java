@@ -1,8 +1,8 @@
 package dev.aest.ark.service;
 
-import dev.aest.ark.model.InventoryItem;
-import dev.aest.ark.model.Item;
-import dev.aest.ark.model.User;
+import dev.aest.ark.entity.InventoryItem;
+import dev.aest.ark.entity.Item;
+import dev.aest.ark.entity.User;
 import dev.aest.ark.repository.InventoryItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

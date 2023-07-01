@@ -1,6 +1,6 @@
 package dev.aest.ark.validation;
 
-import dev.aest.ark.model.LocalCredentials;
+import dev.aest.ark.entity.LocalCredentials;
 import dev.aest.ark.repository.CredentialsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
