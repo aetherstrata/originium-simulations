@@ -9,7 +9,7 @@ import org.springframework.validation.Validator;
 
 @Component
 @RequiredArgsConstructor
-public class CredentialsValidator implements Validator
+public class DuplicateUsernameValidator implements Validator
 {
     private final CredentialsRepository credentialsRepository;
 

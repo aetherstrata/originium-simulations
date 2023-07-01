@@ -3,9 +3,8 @@ package dev.aest.ark.controller;
 import dev.aest.ark.model.LocalCredentials;
 import dev.aest.ark.model.User;
 import dev.aest.ark.service.CredentialsService;
-import dev.aest.ark.service.UserService;
-import dev.aest.ark.validation.CredentialsValidator;
-import dev.aest.ark.validation.DuplicateUserValidator;
+import dev.aest.ark.validation.DuplicateUsernameValidator;
+import dev.aest.ark.validation.DuplicateEmailValidator;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,8 +23,8 @@ public class AuthController
     public static final String REGISTER_ENDPOINT = "/register";
 
     private final CredentialsService credentialsService;
-    private final CredentialsValidator credentialsValidator;
-    private final DuplicateUserValidator duplicateUserValidator;
+    private final DuplicateUsernameValidator duplicateUsernameValidator;
+    private final DuplicateEmailValidator duplicateEmailValidator;
 
     @GetMapping(REGISTER_ENDPOINT)
     public String registerPage(Model model){
@@ -41,8 +40,8 @@ public class AuthController
             @Valid @ModelAttribute("credentials") final LocalCredentials credentials,
             BindingResult credentialsBinding,
             Model model) {
-        this.duplicateUserValidator.validate(user, userBinding);
-        this.credentialsValidator.validate(credentials, credentialsBinding);
+        this.duplicateEmailValidator.validate(user, userBinding);
+        this.duplicateUsernameValidator.validate(credentials, credentialsBinding);
         if(!userBinding.hasErrors() && !credentialsBinding.hasErrors()) {
             user.setNickname(credentials.getUsername());
             credentials.setUser(user);
