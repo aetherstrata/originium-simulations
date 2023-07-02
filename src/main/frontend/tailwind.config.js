@@ -5,6 +5,10 @@ module.exports = {
   content: ["../resources/templates/**/*.{html,js}"],
   theme: {
     extend: {
+      maxWidth: {
+        128: "32rem",
+        256: "64rem"
+      },
       width:{
         "1/10": "10%"
       },
