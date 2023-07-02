@@ -33,7 +33,7 @@
                 <div class="flex items-center space-x-4">
                     <label>
                         <input
-                                th:field="${inventory_item.quantity}"
+                                th:field="${form.quantity}"
                                 class="form-input-field"
                                 required
                                 type="number"
@@ -49,7 +49,7 @@
                     </label>
                 </div>
             </div>
-            <div class="form-validation-error mt-4" th:if="${#fields.hasErrors('inventory_item.quantity')}" th:errors="${inventory_item.quantity}"></div>
+            <div class="form-validation-error mt-4" th:if="${#fields.hasErrors('form.quantity')}" th:errors="${form.quantity}"></div>
         </form>
     </div>
 </div>
