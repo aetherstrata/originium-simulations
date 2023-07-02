@@ -3,7 +3,6 @@ package dev.aest.ark.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.Hibernate;
 import org.hibernate.annotations.Formula;
 
 import java.util.Objects;
@@ -35,9 +34,7 @@ public final class Drop
     @Override
     public boolean equals(Object o){
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-
-        Drop other = (Drop) o;
+        if (!(o instanceof Drop other)) return false;
 
         return this.id != null && this.id.equals(other.id);
     }

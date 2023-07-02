@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import org.hibernate.Hibernate;
 import org.hibernate.annotations.NaturalId;
 
 import java.util.ArrayList;
@@ -41,9 +40,7 @@ public final class User
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-
-        User other = (User) o;
+        if (!(o instanceof User other)) return false;
 
         return email.equals(other.email);
     }

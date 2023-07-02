@@ -4,7 +4,6 @@ import dev.aest.ark.model.ItemType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.Hibernate;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Formula;
 
@@ -62,9 +61,7 @@ public final class Item
     @Override
     public boolean equals(Object o){
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-
-        Item other = (Item) o;
+        if (!(o instanceof Item other)) return false;
 
         return this.id != null && this.id.equals(other.id);
     }

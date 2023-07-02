@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.Hibernate;
 
 import java.util.List;
 import java.util.Objects;
@@ -28,9 +27,7 @@ public final class GameStage
     @Override
     public boolean equals(Object o){
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-
-        GameStage other = (GameStage) o;
+        if (!(o instanceof GameStage other)) return false;
 
         return this.id != null && this.id.equals(other.id);
     }

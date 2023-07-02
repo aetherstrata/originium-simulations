@@ -77,11 +77,9 @@ public final class LocalCredentials implements UserDetails
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (!(o instanceof LocalCredentials other)) return false;
 
-        LocalCredentials that = (LocalCredentials) o;
-
-        return username.equals(that.username);
+        return username.equals(other.username);
     }
 
     @Override

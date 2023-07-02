@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 @Getter
 @Setter
@@ -35,12 +34,10 @@ public final class InventoryItem
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (!(o instanceof InventoryItem other)) return false;
 
-        InventoryItem that = (InventoryItem) o;
-
-        if (!user.equals(that.user)) return false;
-        return item.equals(that.item);
+        if (!user.equals(other.user)) return false;
+        return item.equals(other.item);
     }
 
     @Override

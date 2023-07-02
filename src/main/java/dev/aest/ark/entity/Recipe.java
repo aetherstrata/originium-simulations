@@ -3,7 +3,6 @@ package dev.aest.ark.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.Hibernate;
 
 import java.util.List;
 import java.util.Objects;
@@ -29,9 +28,7 @@ public final class Recipe
     @Override
     public boolean equals(Object o){
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-
-        Recipe other = (Recipe) o;
+        if (!(o instanceof Recipe other)) return false;
 
         return this.id != null && this.id.equals(other.id);
     }

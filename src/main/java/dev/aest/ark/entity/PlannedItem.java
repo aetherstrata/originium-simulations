@@ -7,7 +7,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
-import org.hibernate.Hibernate;
 
 @Getter
 @Setter
@@ -38,12 +37,10 @@ public final class PlannedItem
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (!(o instanceof PlannedItem other)) return false;
 
-        PlannedItem that = (PlannedItem) o;
-
-        if (!user.equals(that.user)) return false;
-        return item.equals(that.item);
+        if (!user.equals(other.user)) return false;
+        return item.equals(other.item);
     }
 
     @Override
