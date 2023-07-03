@@ -15,7 +15,7 @@
         <div class="m-auto w-[190px] h-[190px]">
             <div th:replace="~{fragments/components :: itemImage (${item})}"></div>
         </div>
-        <div class="flex flex-col max-w-5xl px-12 py-4 rounded-xl bg-yellow-400 m-auto space-y-4">
+        <div class="flex flex-col max-w-5xl basis-256 px-12 py-4 rounded-xl bg-yellow-400 m-auto space-y-4">
             <div>
                 <span class="font-bold text-xl">Description</span>
                 <div class="bg-slate-950 h-[2px]"></div>
@@ -27,7 +27,7 @@
                 <span th:text="${item.usage}"></span>
             </div>
         </div>
-        <form th:action="@{/user/inventory/add/{id}(id=${item.id})}" method="post" class="px-12 py-4 rounded-xl bg-yellow-400 m-auto max-w-5xl">
+        <form th:action="@{/user/inventory/add/{id}(id=${item.id})}" method="post" class="px-12 py-4 rounded-xl bg-yellow-400 m-auto max-w-5xl basis-256">
             <div class="flex items-center justify-between">
                 <span class="font-bold text-xl">How many would you like to add?</span>
                 <div class="flex items-center space-x-4">

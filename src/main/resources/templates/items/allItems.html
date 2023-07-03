@@ -39,7 +39,7 @@
                 <div class="w-[96px] h-[96px]">
                     <div th:replace="~{fragments/components :: itemImage (${item})}"></div>
                 </div>
-                <div class="flex flex-col max-w-5xl">
+                <div class="flex flex-col max-w-5xl basis-256">
                     <div class="flex justify-between">
                         <a th:href="@{/item/{id}(id=${item.id})}">
                             <span th:text="${item.nameEn}" class="font-bold text-xl hover:text-blue-700"></span>

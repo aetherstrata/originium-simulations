@@ -958,6 +958,10 @@ select {
   max-width: 36rem;
 }
 
+.basis-256 {
+  flex-basis: 64rem;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }

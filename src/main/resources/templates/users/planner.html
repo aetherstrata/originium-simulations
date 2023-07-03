@@ -15,11 +15,11 @@
             <h2 class="text-6xl font-bold text-yellow-400">Planner</h2>
             <span th:text="${user.nickname}" class="font-bold text-yellow-400 text-4xl m-auto"></span>
         </div>
-        <div th:if="${#lists.isEmpty(planner)}" class="flex justify-between items-center bg-yellow-400 rounded-xl px-12 py-4 m-auto max-w-5xl">
+        <div th:if="${#lists.isEmpty(planner)}" class="flex justify-between items-center bg-yellow-400 rounded-xl px-12 py-4 m-auto max-w-5xl basis-256">
             <span class="font-bold">The planner is empty...</span>
             <a th:href="@{/items}" class="px-4 py-1.5 font-bold text-white bg-slate-950 rounded hover:bg-blue-700">Add new item</a>
         </div>
-        <div th:unless="${#lists.isEmpty(missing)}" class="max-w-5xl m-auto bg-yellow-400 pt-2 pb-4 px-12 rounded-xl">
+        <div th:unless="${#lists.isEmpty(missing)}" class="max-w-5xl basis-256 m-auto bg-yellow-400 pt-2 pb-4 px-12 rounded-xl">
             <span class="text-xl font-bold">Missing items</span>
             <div class="w-full h-[2px] bg-slate-950 mb-4"></div>
             <div class="grid grid-cols-6 justify-between">
@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <div th:unless="${#lists.isEmpty(planner)}" class="max-w-5xl m-auto bg-yellow-400 pt-2 pb-4 px-12 rounded-xl">
+        <div th:unless="${#lists.isEmpty(planner)}" class="max-w-5xl basis-256 m-auto bg-yellow-400 pt-2 pb-4 px-12 rounded-xl">
             <span class="text-xl font-bold">Planned items</span>
             <div class="w-full h-[2px] bg-slate-950 mb-4"></div>
             <div class="grid grid-cols-6 justify-between">
