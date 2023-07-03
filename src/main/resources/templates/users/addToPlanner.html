@@ -27,8 +27,8 @@
                 <span th:text="${item.usage}"></span>
             </div>
         </div>
-        <form th:action="@{/user/planner/add/{id}(id=${item.id})}" method="post" class="px-12 py-4 rounded-xl bg-yellow-400 m-auto max-w-5xl basis-256">
-            <div class="flex items-center justify-between">
+        <form th:action="@{/user/planner/add/{id}(id=${item.id})}" method="post" class="flex flex-initial px-12 py-4 rounded-xl bg-yellow-400 m-auto w-256">
+            <div class="flex items-center justify-between w-full">
                 <span class="font-bold text-xl">How many would you like to add?</span>
                 <div class="flex items-center space-x-4">
                     <label>

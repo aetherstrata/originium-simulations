@@ -966,10 +966,6 @@ select {
   flex: none;
 }
 
-.basis-256 {
-  flex-basis: 64rem;
-}
-
 .cursor-pointer {
   cursor: pointer;
 }
