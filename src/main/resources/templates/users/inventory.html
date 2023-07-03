@@ -19,7 +19,7 @@
             <span class="font-bold">The inventory is empty...</span>
             <a th:href="@{/items}" class="px-4 py-1.5 font-bold text-white bg-slate-950 rounded hover:bg-blue-700">Add new item</a>
         </div>
-        <div th:unless="${#lists.isEmpty(inventory)}" class="grid grid-cols-6 justify-between max-w-5xl basis-256 m-auto bg-yellow-400 py-4 px-12 rounded-xl">
+        <div th:unless="${#lists.isEmpty(inventory)}" class="grid grid-cols-6 justify-between flex-initial w-256 m-auto bg-yellow-400 py-4 px-12 rounded-xl">
             <div th:each="invItem : ${inventory}" class="flex flex-col justify-between">
                 <div>
                     <div class="w-[96px] h-[96px] m-auto">

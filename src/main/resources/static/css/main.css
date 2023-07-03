@@ -958,6 +958,14 @@ select {
   max-width: 36rem;
 }
 
+.flex-initial {
+  flex: 0 1 auto;
+}
+
+.flex-none {
+  flex: none;
+}
+
 .basis-256 {
   flex-basis: 64rem;
 }

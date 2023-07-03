@@ -35,11 +35,11 @@
     <div class="flex flex-col justify-center space-y-4 bg-neutral-800 pb-12">
         <div th:each="item : ${items}" class="m-auto flex space-x-4 items-center">
             <a sec:authorize="isAuthenticated()" th:href="@{/user/inventory/add/{id}(id=${item.id})}" class="px-4 py-1.5 font-bold bg-yellow-400 rounded hover:bg-blue-700">Store</a>
-            <div class="flex rounded-xl bg-yellow-400 py-4 pl-4 pr-12 space-x-4">
-                <div class="w-[96px] h-[96px]">
+            <div class="flex rounded-xl bg-yellow-400 py-4 pl-4 pr-12 space-x-4 max-w-5xl">
+                <div class="w-[96px] h-[96px] flex-none">
                     <div th:replace="~{fragments/components :: itemImage (${item})}"></div>
                 </div>
-                <div class="flex flex-col max-w-5xl basis-256">
+                <div class="flex flex-col flex-initial w-256">
                     <div class="flex justify-between">
                         <a th:href="@{/item/{id}(id=${item.id})}">
                             <span th:text="${item.nameEn}" class="font-bold text-xl hover:text-blue-700"></span>
