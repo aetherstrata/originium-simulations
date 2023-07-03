@@ -1,6 +1,7 @@
 package dev.aest.ark.validation;
 
 import dev.aest.ark.entity.LocalCredentials;
+import dev.aest.ark.model.RegistrationFormData;
 import dev.aest.ark.repository.CredentialsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -15,12 +16,12 @@ public class DuplicateUsernameValidator implements Validator
 
     @Override
     public boolean supports(Class<?> type) {
-        return LocalCredentials.class.equals(type);
+        return RegistrationFormData.class.equals(type);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
-        LocalCredentials credentials = (LocalCredentials)target;
+        RegistrationFormData credentials = (RegistrationFormData) target;
         if(credentialsRepository.findByUsername(credentials.getUsername()).isPresent()){
             errors.reject("username.duplicate");
         }

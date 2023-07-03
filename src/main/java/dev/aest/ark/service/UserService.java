@@ -19,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService
 {
+    private final ProfilePictureService profilePictureService;
     private final UserRepository userRepository;
 
     /**
@@ -70,6 +71,7 @@ public class UserService
 
     @Transactional
     public void deleteUser(User user) {
+        this.profilePictureService.delete(user.getProfilePicture());
         this.userRepository.delete(user);
     }
 

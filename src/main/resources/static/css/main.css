@@ -1148,6 +1148,11 @@ select {
   background-color: rgb(250 204 21 / var(--tw-bg-opacity));
 }
 
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;

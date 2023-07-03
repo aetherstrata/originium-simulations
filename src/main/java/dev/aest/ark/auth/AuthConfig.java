@@ -48,20 +48,14 @@ public class AuthConfig
 
     @Bean
     protected SecurityFilterChain configureHttpSecurity(final HttpSecurity httpSecurity) throws Exception {
-        // See https://stackoverflow.com/questions/75222930/spring-boot-3-0-2-adds-continue-query-parameter-to-request-url-after-login
-        // HttpSessionRequestCache requestCache = new HttpSessionRequestCache();
-        // requestCache.setMatchingRequestParameterName(null);
-
         httpSecurity
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.GET,"/", "/credits", "/items", "/item/**", "/api/v1/**", "/css/**", "/images/**", "/favicon.png", "/error", REGISTER_ENDPOINT).permitAll()
+                        .requestMatchers(HttpMethod.GET,"/", "/credits", "/items", "/item/**", "/api/v1/**", "/css/**", "/images/**", "/favicon.png", "/error", "/uploads/**", REGISTER_ENDPOINT).permitAll()
                         .requestMatchers(HttpMethod.POST, REGISTER_ENDPOINT, LOGIN_ENDPOINT).permitAll()
                         .requestMatchers("/admin/**").hasAuthority(LocalCredentials.ADMIN_AUTHORITY)
                         .anyRequest().authenticated())
-                //.requestCache(cache -> cache
-                //        .requestCache(requestCache))
                 .formLogin(login -> login
                         .loginPage(LOGIN_ENDPOINT)
                         .failureUrl(LOGIN_ENDPOINT+"?error=true")

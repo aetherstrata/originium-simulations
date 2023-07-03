@@ -14,49 +14,59 @@
         <div class="m-auto text-gray-900 px-6 py-12 max-w-lg">
             <h2 class="text-3xl font-bold text-center text-yellow-400">Sign Up</h2>
             <div class="mt-8 max-w-lg">
-                <form th:action="@{/register}" method="post" class="space-y-4 w-96">
+                <form th:action="@{/register}" enctype="multipart/form-data" method="post" class="space-y-4 w-96">
                     <div>
                         <label class="block">
                             <span class="form-input-title">Username</span>
                             <input
-                                    th:field="${credentials.username}"
+                                    th:field="${form.username}"
                                     required
                                     placeholder=""
                                     type="text"
                                     class="form-input-field"
                             />
                         </label>
-                        <div class="form-validation-error" th:if="${#fields.hasErrors('credentials.username')}"
-                             th:errors="${credentials.username}"></div>
+                        <div class="form-validation-error" th:if="${#fields.hasErrors('form.username')}"
+                             th:errors="${form.username}"></div>
                     </div>
                     <div>
                         <label class="block">
                             <span class="form-input-title">Email address</span>
                             <input
-                                    th:field="${user.email}"
+                                    th:field="${form.email}"
                                     required
                                     placeholder="user@example.com"
                                     type="email"
                                     class="form-input-field"
                             />
                         </label>
-                        <div class="form-validation-error" th:if="${#fields.hasErrors('user.email')}"
-                             th:errors="${user.email}"></div>
+                        <div class="form-validation-error" th:if="${#fields.hasErrors('form.email')}"
+                             th:errors="${form.email}"></div>
                     </div>
                     <div>
                         <label class="block">
                             <span class="form-input-title">Password</span>
                             <input
-                                    th:field="${credentials.password}"
+                                    th:field="${form.password}"
                                     required
                                     placeholder=""
                                     type="password"
                                     class="form-input-field"
                             />
                         </label>
-                        <div class="form-validation-error" th:if="${#fields.hasErrors('credentials.password')}"
-                             th:errors="${credentials.password}"></div>
+                        <div class="form-validation-error" th:if="${#fields.hasErrors('form.password')}"
+                             th:errors="${form.password}"></div>
                     </div>
+                    <label class="block">
+                        <span class="form-input-title">Picture</span>
+                        <input
+                                name="image"
+                                placeholder=""
+                                type="file"
+                                accept="image/*"
+                                class="form-input-field"
+                        />
+                    </label>
                     <div class="flex justify-center">
                         <label class="inline-flex items-center mt-8">
                             <input
@@ -67,10 +77,8 @@
                         </label>
                     </div>
                 </form>
-                <div class="form-validation-error mt-8" th:each="err : ${#fields.errors('user')}" th:text="${err}"></div>
-                <div class="form-validation-error mt-2" th:each="err : ${#fields.errors('credentials')}" th:text="${err}"></div>
+                <div class="form-validation-error mt-8" th:each="err : ${#fields.errors('form')}" th:text="${err}"></div>
             </div>
-
         </div>
     </div>
 </div>

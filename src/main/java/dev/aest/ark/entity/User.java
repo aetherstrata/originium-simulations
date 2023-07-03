@@ -27,6 +27,8 @@ public final class User
 
     private String nickname;
 
+    private String profilePicture;
+
     @PrimaryKeyJoinColumn
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private LocalCredentials credentials;

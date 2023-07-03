@@ -23,6 +23,7 @@
                 <span>Item count:</span>
                 <span th:text="${inventory_count}" class="font-bold"></span>
             </div>
+            <img th:if="${user.profilePicture}" th:src="${user.profilePicture}" class="rounded-xl object-cover w-[190px]">
             <div class="rounded-xl bg-yellow-400 px-12 py-4">
                 <a th:href="@{/user/planner}">
                     <span class="font-bold block text-4xl hover:text-blue-700">Planner</span>

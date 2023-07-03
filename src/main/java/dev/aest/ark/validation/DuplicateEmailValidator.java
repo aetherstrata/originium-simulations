@@ -1,6 +1,7 @@
 package dev.aest.ark.validation;
 
 import dev.aest.ark.entity.User;
+import dev.aest.ark.model.RegistrationFormData;
 import dev.aest.ark.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -15,12 +16,12 @@ public class DuplicateEmailValidator implements Validator
 
     @Override
     public boolean supports(Class<?> type) {
-        return User.class.equals(type);
+        return RegistrationFormData.class.equals(type);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
-        User user = (User)target;
+        RegistrationFormData user = (RegistrationFormData) target;
 
         if (userRepository.findByEmail(user.getEmail()).isPresent()){
             errors.reject("email.duplicate");
