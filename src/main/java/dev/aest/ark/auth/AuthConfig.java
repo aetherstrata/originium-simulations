@@ -56,7 +56,7 @@ public class AuthConfig
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.GET,"/", "/credits", "/items", "/item/**", "/api/v1/**", "/css/**", "/images/**", "/favicon.png", REGISTER_ENDPOINT).permitAll()
+                        .requestMatchers(HttpMethod.GET,"/", "/credits", "/items", "/item/**", "/api/v1/**", "/css/**", "/images/**", "/favicon.png", "/error", REGISTER_ENDPOINT).permitAll()
                         .requestMatchers(HttpMethod.POST, REGISTER_ENDPOINT, LOGIN_ENDPOINT).permitAll()
                         .requestMatchers("/admin/**").hasAuthority(LocalCredentials.ADMIN_AUTHORITY)
                         .anyRequest().authenticated())
