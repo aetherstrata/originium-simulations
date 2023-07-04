@@ -1,5 +1,9 @@
 # Originium Simulations
 
+#### An arknights inventory tracker and planner
+
+This project was made as an exam assignment. It's very unlikely I will maintain and, most importantly, host this myself. I recommend you to use one of the other established solutions (eg. [Krooster](https://www.krooster.com/), [Aceship](https://aceship.github.io/AN-EN-Tags/index.html), [ark-nights.com](https://ark-nights.com/)). I might contribute to some project in the future...
+
 ## Casi d'uso
 
 ### Utente anonimo
